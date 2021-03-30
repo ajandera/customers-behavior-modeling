@@ -426,3 +426,111 @@ All model results you can see in evaluation part~\ref{evaluation}.\\
 \end{figure}
 \newpage
 \section{Prediction application} \label{sec:app}
+My prediction application is finally written in Matlab live script with predefined constants based on Megaplay s.r.o data,
+but for modeling and dynamic prediction are used Live scripts Controls so in the script I am able to easily set all constant to model any situations.
+This mechanism give me options to see other situations.
+By this power I was able to see my model in other situation and will be described in my final summary~\ref{summary}.\\
+\subsection{Using random values} \label{subsec:rand}
+In my model are used random generated variables to simulate situation from real store where the user can compare with other store in
+the different situation.
+This other stores and situation should be better or worst to actual store.
+\subsection{Main Matlab code} \label{subsec:matlab}
+\begin{lstlisting}[language=mcode]
+% generate 10 times for get average values to prevent
+% false positive and negative results
+for c=1:experimentationCycles
+    % go with each visitor thrue the prediction model and get
+    for i=1:numberOfVisitors1_2020
+        % actual tested value for each cycle
+        Pj = generatePriceOfProduct();
+        % product price minus product retail price
+        Pi = Pj*margin;
+        % actual product order value for each cycle
+        Qj = 1;
+        % statistic value get from open data
+        if rand(1) > 0.98
+            % Quality index for vendor 2
+            Q2 = Q1 - rand(1);
+            % vendor 2 product price
+            P2 = Pj  - rand(1);
+            satisfaction = customerSatisfaction - randi(10);
+        else
+            % Quality index for vendor 2
+            Q2 = Q1 + rand(1);
+            % vendor 2 product price
+            P2 = Pj + rand(1);
+            satisfaction = customerSatisfaction+randi(10);
+        end
+        % get value of vendor submodel
+        vendorProbability = vendor(beta, gamma, delta,...
+                            Pj, P2, Q1, Q2);
+        % get value of psychology submodel
+        psychologyProbability = psychology(averageP,...
+                averageQ,Pj, Pi, Qj, Qi);
+        % get value of loyalty submodel
+        loyaltyProbability = loyalty(satisfaction,...
+                trust, perceived);
+        % customer goes to other online store
+        % go to next cycle
+        if vendorProbability == 0
+            continue
+        end
+
+        % prepare square matrix for hidden markov model
+        trans = [vendorProbability vendorProbability ...
+        vendorProbability; psychologyProbability ...
+        psychologyProbability psychologyProbability; ...
+        loyaltyProbability loyaltyProbability ...
+        loyaltyProbability];
+
+        % generate hidden markov model data
+        [seq,states] = ...
+            hmmgenerate(3,trans,probabilityWages,...
+                'Statenames',{'order';'not finished order';...
+                'no order decision'});
+
+        % use viterbi algoritm to get states during hmm
+        estimatesStates = ...
+            hmmviterbi(seq,trans,probabilityWages,...
+                'Statenames',{'order';'not finished order';...
+                'no order decision'});
+
+        % check states that customer not finished order
+        exactMatchMask = strcmp(estimatesStates,...
+                'no order decision');
+
+        if  sum(exactMatchMask) < 1
+            orders = orders + 1;
+            % increate psychology effect of success store
+            % when order is finished
+            Qj = Qj + 1;
+        end
+    end
+end
+\end{lstlisting}\\
+\subsection{Sub-models function in Matlab} \label{subsec:matlab-sub-models}
+\begin{lstlisting}[language=mcode]
+% model for calculation vendor probability
+function v = vendor(beta, gamma, delta, Px, Py, Qx, Qy)
+    v = (beta * heaviside(Px - Py))+(gamma * heaviside(Qx-Qy))+...
+        (delta * heaviside(Px - Py) * heaviside(Qx-Qy));
+end
+
+% model for cacluclation loaylty probability
+function l = loyalty(satisfaction, trust, percieved)
+    R = satisfaction + trust + percieved;
+    Z = trust + satisfaction;
+    l = (R + Z) / Z;
+end
+
+% model for calculation psychology probablity
+function p = psychology(averageQ, averageP, Pj, Pi, Qj, Qi)
+    p = (1 + max(Pj, averageP) / 1 + max(Pi, averageP)) + ...
+        (1 + max(Qj, averageQ) / 1 + max(Qi, averageQ));
+end
+
+% generate random value of order
+function price = generatePriceOfProduct(min, max)
+    price = (max-min).*rand(1) + min;
+end
+\end{lstlisting}\\
