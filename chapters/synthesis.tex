@@ -282,27 +282,147 @@ $EMIS(i,k)$ is the probability that symbol $k$ is emitted from state $i$.\\
 \\
 \textbf{shopycrm.com}\\
 Online CRM application focused on online stores which provides all store agenda and get precalculated data which I was used for my model to simplify the prediction calculation.
-\section{Time series for setting reference values}
-\subsubsection{Moving average}
-As a first basic time series analysis we tried moving averages. These method looks like not usefull for our needs,
-because of not reflecting trend in e-commerce. Specific e-commerce trends as Christmas time and new years discounts.
+\newpage
+\section{Time series for setting reference values} \label{sec:timeseries}
+Based on Statistic solution chapter~\ref{sec:statistics} I create four statistic approaches to predict 1/2020 income for store based on previous data from years 2018 and 2019.
+This previous income can be found in appendix A Reference data~\ref{reference_data}.
+For make a point of view look on graph~\ref{income} with income data.\\
 \begin{figure}[h!]
     \begin{center}
-        \includegraphics[width=140mm]{moving_average.png}
+        \includegraphics[width=150mm]{income.png}
     \end{center}
-    \caption{Moving average results}
-    \label{Time series moving average}
+    \caption{Megaplay s.r.o income from stores in 2018 - 2019}
+    \label{income}
 \end{figure}
-\newpage
+\subsubsection{Moving average}
+Like a first basic time series analysis I tried moving averages.
+These method looks like not useful for our needs, because of not able to reflecting trend in
+Specific e-commerce trends as Christmas time and new years discounts.
+For my prediction reference data I will create prediction with moving average $n=3$ and $n=5$.
+Here you can see part of code in Matlab to create the simulation, than you can see results in graph~\ref{moving_average_3}
+for $n=3$ and on the next graph~\ref{} for $n=5$\\
+\\
+\textbf{Calculation for n=3}\\
+\begin{lstlisting}[language=mcode]
+% generate matrix for moving average n=3
+% EARN is matrix with income data per months
+for i = 2:length(EARN)
+    if i < 24
+        average3(1,i-1) = (EARN(1, i-1)+EARN(1, i)+EARN(1,i+1))/3;
+    end
+end
+
+% with wages 1/4 1/2 1/4
+for i = 2:length(EARN)
+    if i < 24
+        average3wages(1,i-1) = (1/4*EARN(1, i-1))+ ...
+        (1/2*EARN(1, i))+(1/4*EARN(1,i+1));
+    end
+end
+
+% moving average n=3 first level prediction
+firstLevelPrediction = 1/3*(-2*EARN(1,22)+1*EARN(1,23)+4*EARN(1,24))
+\end{lstlisting}\\
+\\
+Result from this prediction for 1/2020 is 3 561 213 Kč and it's aberration is 41.88\%.\\
+\\
+\textbf{Calculation for n=5}\\
+\begin{lstlisting}[language=mcode]
+% generate matrix for moving average n=5
+% EARN is matrix with income data per months
+for i = 3:length(EARN)
+    if i < 23
+        average5(1,i-2) = (EARN(1, i-2)+EARN(1, i-1)+EARN(1, i)+ ...
+        EARN(1,i+1)+EARN(1, i+2))/5;
+    end
+end
+
+% with wages 1/35(-3,12,17,12,-3)
+
+for i = 3:length(EARN)
+    if i < 23
+        average5wages(1,i-2) = 1/35*(-3*EARN(1, i-2)+ ...
+        12*EARN(1, i-1)+17*EARN(1, i)+12*EARN(1, i+1)-3*EARN(1, i+2));
+    end
+end
+
+% first level prediction for n=5
+firstLevelPrediction5 = 1/10*(-4*EARN(1,20)-1*EARN(1,21)+...
+                        2*EARN(1,22)+5*EARN(1,23)+8*EARN(1,24))
+% second level prediction for n=5
+secondLevelPrediction5 = 1/5*(3*EARN(1,20)-3*EARN(1,21)-...
+                        4*EARN(1,22)+0*EARN(1,23)+9*EARN(1,24))
+\end{lstlisting}\\
+\\
+Result from this prediction for 1/2020 are 3 274 399 Kč and it's aberration is 33.91\% for first level prediction and 3 361 156 Kč with aberration 30.45\%.\\
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=150mm]{moving_average_3.png}
+    \end{center}
+    \caption{Moving average results for n=3}
+    \label{moving_average_3}
+\end{figure}
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=150mm]{moving_average_5.png}
+    \end{center}
+    \caption{Moving average results for n=5}
+    \label{moving_average_5}
+\end{figure}
 \subsubsection{Models}
-More better results we get from model $Tr_{t2}=a_0+a_1t+a_2t^2$. But the goal is not to find the best
-statistics solution in time series, so this model is enough as a reference. Time series analysis get the
-result of 14,56\% aberrance from the real 2020 data.
+After moving average I use two models for linear regression to predict other reference data by better statistic solutions.
+I will test these two models:
+\begin{itemize}
+    \item $Tr_{t1}=a_0+a_1t$
+    \item $Tr_{t2}=a_0+a_1t+a_2t^2$
+\end{itemize}\\
+\\
+\textbf{Regression analysis for $Tr_{t1}=a_0+a_1t$}\\
+\begin{lstlisting}[language=mcode]
+X = [ones(1,24); ...
+1:1:24];
+XTX = X*X';
+invXTX = inv(XTX);
+XTY = X*EARN';
+parameters = invXTX*XTY;
+a0 = parameters(1, 1);
+a1 = parameters(2, 1);
+Trt1 = a0+a1.*t;
+
+%prediction for 1/2021
+PredictionTrt1 = a0+a1*25
+\end{lstlisting}\\
+\\
+\textbf{Regression analysis for $Tr_{t2}=a_0+a_1t+a_2t^2$}\\
+\begin{lstlisting}[language=mcode]
+X2 = [ones(1,24); ...
+    1:1:24; ...
+    1^2 2^2 3^2 4^2 5^2 6^2 7^2 ...
+    8^2 9^2 10^2 11^2 12^2 13^2 14^2 15^2 16^2 ...
+    17^2 18^2 19^2 20^2 21^2 22^2 23^2 24^2];
+XTX2 = X2*X2';
+invXTX2 = inv(XTX2);
+XTY2 = X2*EARN';
+parameters = invXTX2*XTY2;
+a0 = parameters(1, 1);
+a1 = parameters(2, 1);
+a2 = parameters(3, 1);
+Trt2 = a0+a1.*t+a2.*t.^2;
+
+%prediction for 1/2020
+PredictionTrt2 = a0+a1*25+a2*25^2
+\end{lstlisting}\\
+\\
+Better results I get from model $Tr_{t2}=a_0+a_1t+a_2t^2$ as is see in graph~\ref{ts_models}.
+The goal of this thesis is not about to find the best statistics solution in time series, so for my purpose this model is enough as a reference.
+Time series analysis for better model get the result with aberration of 14,56\% from the real 2020 data.
+All model results you can see in evaluation part~\ref{evaluation}.\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=140mm]{model_ts.png}
     \end{center}
     \caption{Time series model results}
-    \label{Time series model's}
+    \label{ts_models}
 \end{figure}
+\newpage
 \section{Prediction application} \label{sec:app}

@@ -5,11 +5,17 @@
 \subsection{Compare results}
 \begin{table}[h!]
     \begin{center}
-        \begin{tabular}{ | l | c | c | c | c |}
+        \begin{tabular}{ | l | c | c |}
             \hline
-            {\textbf{TS level 1}} & \textbf{TS level 2} & \textbf{Model based} & \textbf{Real earn}\\
+            {\textbf{Type of prediction}} & \textbf{Income (Kč)} & \textbf{Aberration (\%)}\\
             \hline
-            3 274 400 Kč & 3 361 157 Kč & 2 191 032 Kč & XXX \\
+            Moving average n=3 level 1 & 3 561 213 & 41.88\\
+            Moving average n=5 level 1 & 3 274 399 & 30.45\\
+            Moving average n=5 level 2 & 3 361 157 & 33.91\\
+            Linear regression $Tr_{t1}=a_0+a_1t$ & 2 089 387 & 20.11\\
+            Linear regression $Tr_{t2}=a_0+a_1t+a_2t^2$ & 2 191 032 & 14.56\\
+            \textbf{Customer behavior model} & \textbf{2 432 878} & \textbf{3.17}\\
+            Real earn & 2 510 086 & ---\\
             \hline
         \end{tabular}
     \end{center}
