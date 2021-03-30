@@ -35,7 +35,7 @@ Locking, which creates barriers to market entry, can be avoided by antitrust mea
 Proprietary locking is for example blocking mobile phones for only one of the operators or DRM.
 
 \section{Mathematical Background and Marketing introduction} \label{sec:introduction}
-
+Overview of mathematical equation and approaches used to my prediction in context of Marketing approaches usually used to predict customer behavior.\\
 \subsection{Models} \label{subsec:models}
 \textbf{Simple Dynamic Models} \label{subsec:simpleDynamicModels}\\
 One of the simplest models that have been considered for human behavior modeling are dynamic single prices,
@@ -243,29 +243,44 @@ and their influences were included in one or more models:
 \end{enumerate}
 \subsection{Viterbi algorithm} \label{subsec:viterbi}
 The Viterbi algorithm is a dynamic programming algorithm for finding the most likely sequence of hidden
-states—called the Viterbi path—that results in a sequence of observed events, especially in the
-context of Markov information sources and hidden Markov models (HMM). \\
+states called the Viterbi path that results in a sequence of observed events, especially in the
+context of Markov information sources and hidden Markov models (HMM)~\ref{Viterbi schema}.
+The algorithm has found universal application in decoding the convolutional codes used in
+both CDMA and GSM digital cellular, dial-up modems, satellite, deep-space communications, and 802.11 wireless LANs.
+It is now also commonly used in speech recognition, speech synthesis, keyword spotting, computational
+linguistics, and bioinformatics.
+For example, in speech-to-text (speech recognition), the acoustic signal is treated as the observed sequence of events,
+and a string of text is considered to be the "hidden cause" of the acoustic signal.
+The Viterbi algorithm finds the most likely string of text given the acoustic signal.
+Here you can see Viterbi algoritm implementation in Python language: \\
+\begin{lstlisting}[language=python]
+# probability == p. Tm: the transition matrix. Em: the emission matrix.
+function viterbi(O, S, Π, Tm, Em): best_path
+  # To hold p. of each state given each observation.
+  trellis ← matrix(length(S), length(O))
+  # Determine each hidden state's p. at time 0…
+  for s in range(length(S)):
+    trellis[s, 0] ← Π[s] * Em[s, O[0]]
+  # and afterwards, assuming each state's most likely prior state, k.
+  for o in range(1, length(O)):
+    for s in range(length(S)):
+      k ← argmax(k in trellis[k, o-1] * Tm[k, s] * Em[s, o])
+      trellis[s, o] ← trellis[k, o-1] * Tm[k, s] * Em[s, o]
+  best_path ← list()
+  # Backtrack from last observation.
+  for o in range(-1, -(length(O)+1), -1):
+    # Most likely state at o
+    k ← argmax(k in trellis[k, o])
+    # is noted for return.
+    best_path.insert(0, S[k])
+  return best_path
+\end{lstlisting}
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=90mm]{viterbi_graph.png}
 	\end{center}
 	\caption{Viterbi algorithm schema example}
 	\label{Viterbi schema}
-\end{figure}
-\newpage
-The algorithm has found universal application in decoding the convolutional codes used in
-both CDMA and GSM digital cellular, dial-up modems, satellite, deep-space communications, and 802.11 wireless LANs.
-It is now also commonly used in speech recognition, speech synthesis, keyword spotting, computational
-linguistics, and bioinformatics. For example, in speech-to-text (speech recognition), the acoustic signal
-is treated as the observed sequence of events, and a string of text is considered to be the
-"hidden cause" of the acoustic signal. The Viterbi algorithm finds the most likely string of text given
-the acoustic signal. \\
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=140mm]{viterbi.png}
-	\end{center}
-	\caption{Viterbi algorithm code}
-	\label{Viterbi}
 \end{figure}
 \subsection{Predicted effects} \label{subsec:predicted}
 \begin{enumerate}
@@ -309,9 +324,9 @@ For example, if the preference share of brand $A$ is plotted against brand $B$ i
 the point must be somewhere along the straight line $B(t) = 1, A(t)$.
 Of interest is the case when a third brand is added, possibly as a decoy.
 The additional brand means that the preference distribution changes from being a straight line in the two-dimensional plane $(A, B)$,
-to a plane in three-dimensional space $(A,B,C)$.
-
-\textbf{Customer decision process} \label(sec:decision)
+to a plane in three-dimensional space $(A,B,C)$.\\
+\\
+\textbf{Customer decision process} \label{sec:decision}\\
 Described in~\cite{patel} show that the standard Logit model~\ref{subsec:logit} for customer choice assumes that
 the probability, $p_i$, with which a customer buys a given product $i$ from a range of products $<1, n>$ depends on
 the value which customer attaches to that product $V_i$, and the price of the product $P_i$.
@@ -344,8 +359,7 @@ In such a model the products are all treated independently.
 Only coupling between the probabilities occurs through the normalisation constant $C$.
 Product $I$ will depend not only on the value and price of that product, $V_i$ and $P_i$, but on the value and prices of all products.
 The goal of this section is to formulate a model for this probability which is based on binary comparisons, that is,
-on comparisons of two products at a time.
-\newpage
+on comparisons of two products at a time.\\
 \subsection{Logit analysis in marketing} \label{subsec:logit}
 Logit analysis is a statistical technique used by marketers to assess the scope of customer acceptance of a product, particularly a new product.
 It attempts to determine the intensity or magnitude of customers' purchase intentions and translates that into a measure of actual buying behavior.
@@ -447,8 +461,7 @@ p_3 = \frac{2np}{(n+2)(n+1)}
 \end{array}
 \end{equation}
 \\
-Thus, again, we see that there is no decoy effect. Product 1 has exactly the same market share as it would have if product 3 were not present.\\
-\newpage
+We see that there is no decoy effect. Product 1 has exactly the same market share as it would have if product 3 were not present.\\
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=100mm]{level1DT.png}
@@ -514,10 +527,9 @@ where $C$ is chosen so that $p_i + p_j = 1$.
 The basic idea from~\cite{patel} is to build a model based on a physical analogy, between the customers buying behavior
 and particle-particle dynamics.
 We assume customers to be particles moving in quality space.
-\\
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=140mm]{strength.png}
+		\includegraphics[width=80mm]{strength.png}
 	\end{center}
 	\caption{Product space with two products}
 	\label{Strength of products}
@@ -561,7 +573,8 @@ As is written by~\cite{benkova} we can divide time series to
 \begin{itemize}
 	\item subjective and objective
 	\item quantitative, qualitative and causal
-\end{itemize}
+\end{itemize}\\
+\\
 \textbf{As basic characteristics we can define:}
 \begin{itemize}
 	\item absolute growth (1.difference)
@@ -576,7 +589,7 @@ As is written by~\cite{benkova} we can divide time series to
 	\begin{equation} \label{eq:20}
 	k_t = \frac{y_t}{y_{t-1}}, t = 2,3 ....,n
 	\end{equation}
-\end{itemize}
+\end{itemize}\\
 \\
 Modeling of time series can be done by one-dimensional or two-dimensional models.
 Basic one-dimensional model is used in situation where expected that time will be the only one variable.\\

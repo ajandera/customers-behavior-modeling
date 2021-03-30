@@ -6,11 +6,16 @@
 Based on the analytical part~\ref{sec:analytical} I will be working on a mathematical model to predict customer behavior consist of vendor,
 psychology and loyalty sub-models combine in hidden markov model (HMM) to final prediction model.
 States in the HMM will be read by viterbi algoritm~\ref{subsec:viterbi} which is able to predict most probability state in propagation by HMM.
-I try to get a better results than actual standard statistic method (Time Series analysis) to predict customer behavior in e-commerce.
+I try to get a better results than actual standard statistic method (Time Series analysis)~\ref{sec:statistics} to predict customer behavior in e-commerce.
+In the final my model will be able to predict online store future earn from previous earn and previous number of visitors.
+For successfully prediction we will use some open data about store strength and customer satisfaction and some predefined and computed variables from store.
 \section{Modeling prediction of customer behavior} \label{sec:modeling}
-The goal of model is to predict probability that customer will successfully finish order. This model will be consist of three submodels.
-Vendor model,\ psychology model and loyalty model. All sub-models will be combine to complex prediction mechanism, as you can see on image~\ref{Model schema with interaction}
+The goal of model is to predict probability that customer will successfully finish order.
+This model will be consists of three sub-models.
+Vendor model,\ psychology model and loyalty model.
+All sub-models will be combined to complex prediction mechanism, as you can see on image~\ref{Model schema with interaction}
 To final prediction will be used Hidden Markov model in combination with Viterbi algorithm to detect hidden states to reflect set weights and get better results for each industry.
+Weights for model are industry dependent and for my modeling I set them from Megaplay s.r.o data and with cooperation with the owner of Megaplay s.r.o who has more than 10 years of experience in that industry, so he is the right person to know that kind of business.
 \\
 \begin{figure}[h!]
     \begin{center}
@@ -21,30 +26,106 @@ To final prediction will be used Hidden Markov model in combination with Viterbi
 \end{figure}
 \\
 \subsection{Preprocessing of input data} \label{subsec:preprocessing}
-Data should have to be anonymized \footnote{Data anonymization is a type of information sanitization whose intent
-is privacy protection.
+Data should have to be anonymize \footnote{Data anonymization is a type of information sanitization whose intent is privacy protection.
 It is the process of either encrypting or removing personally identifiable information from data sets, so that
 the people whom the data describe remain anonymous.} and pseudonymized \footnote{Pseudonymization is a data management
 and de-identification procedure by which personally identifiable information fields within a data record are replaced
 by one or more artificial identifiers, or pseudonyms.} to keep legal notice of~\cite{gdpr}.
-Than we should utilized data to utilized inputs.
-Prepared data will be stored as csv files and than will be imported to Matlab for computation.
-\newpage
+Then we should utilize data to utilized inputs.
+This prepared data I will add to the Matlab live script file to be used for prediction.\\
+\\
+\textbf{Average day visitors for a predicted month}\\
+This value was calculated from anonymize user data from Google Analytics tool used their prediction mechanism to get number of future users based on previous a number of visitors.\\
+\\
+\textbf{Perceived value for psychology model} \label{perceived}\\
+This variable is needed for loyalty model~\ref{subsec:model_loyalty} and is a get from open e-commerce compare data from Heureka.cz/Heureka.sk internal tool.\\
+\\
+\textbf{Number of orders 2018 - 2019}\\
+Number of orders get from shopycrm.com tool which is used in Megaplay s.r.o to manage their business\\
+\\
+\textbf{Unique products sell}\\
+This variable is used in Psychology model~\ref{subsec:model_psychology} for Price aspect calculation~\ref{eq:26}.\\
+\\
+\textbf{Customer satisfaction} \label{customerSat}\\
+This value if from Heureka open data, and it's a calculated value from the all customer reviews of the store.\\
+\\
+\textbf{Margin}\\
+The retail margin percentage measures the retail margin as a percentage of the retail price.
+This measurement gives you a context for the retail margin.
+For example, if you have a 5~€ retail margin on two different products, but one costs 150~€ and one costs 10~€, the second product would have a much higher retail margin percentage.\\
+\\
+\textbf{Number of product order each day $Q_i$}\\
+This is a calculated value from shopycrm.com about number of product order for each
+It's used in Psychology model~\ref{subsec:model_psychology} \\
+\\
+\textbf{Quality index $Q_1$}\\
+This is vendor quality index get from Heureka open data.
+This is a power of the store.
+Higher number mean that for a customer is more difficult to leave our store and go to another online store.\\
+\\
+\textbf{Vendor coefficients $\beta, \gamma, \delta$} \label{vendorCoeff}\\
+This three coefficients are used as weight for vendor model~\ref{subsec:model_vendors} and was set with cooperation with Megaplay s.r.o owner for their industry.
+It's represent the relation between vendor prices and vendor quality.\\
+\\
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ | l | c |}
+            \hline
+            {\textbf{Variable name}} & \textbf{Value}\\
+            \hline
+            average day visitors for a predicted month $U_a$& 2357 \\
+            perceived value for psychology model & 0.87 \\
+            number of orders 2018 - 2019 $O_c$ & 26 530 \\
+            Unique products sell $U_p$ & 11048\\
+            Customer satisfaction & 90\%\\
+            Margin & 0.27\\
+            $Q_i$ & 4.12\\
+            $Q_1$ & 0.94\\
+            Vendor coefficients: & \\
+            $\beta$ & 0.7\\
+            $\gamma$ & 0.7\\
+            $\delta$ & 0.85\\
+            \hline
+        \end{tabular}
+    \end{center}
+    \caption{Coefficient data from Megaplay s.r.o}
+    \label{megaplay_data}
+\end{table}
+\\
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ | l | c |}
+            \hline
+            {\textbf{Variable name}} & \textbf{Value equation}\\
+            \hline
+            number of visitors 1/2020 & $31 * U_a$\\
+            average earn per order & $\sum EARN / O_c$\\
+            \overline{Q} & $1/U_p * (U_p/ O_c)$\\
+            \overline{P} & $1/U_p * margin$\\
+            trust & $1/O_c * O_c/U_a$\\
+            \hline
+        \end{tabular}
+    \end{center}
+    \caption{Calculated data from Megaplay s.r.o}
+    \label{megaplay_data_equation}
+\end{table}
+\\
 \subsection{Vendors} \label{subsec:model_vendors}
-For simplification we will take to account only a two vendors market share, without 100\% domination, because of on a real
-market is 100\% monopole unlikely see and than we will be reflect only main competitor.
+For simplification, I will take to account only a two vendors market share, without 100\% domination, because of on a real
+market is 100\% monopole unlikely see and then I will be reflected only main competitor.
 From that condition it will see that for market dominate vendor it will return false positive results.
-Our model is based on equations from Brands section~\ref{eq:10} and from those equation we will get probability of vendor change from
+Our model is based on equations from Brands section~\ref{eq:10} and from those equations we will get probability of vendor change from
 vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$ it will break the computation and customer
 will leave our store without successfully completing buy process.
-Results of this computation wil be probability for each iteration of buy process simulation in an interval $<0,1>$. Data for this model
-will comes from open data from google.com, heureka.cz/heureka.sk and national governments.
+Results of this computation wil be probability for each iteration of buy process simulation in an interval $<0,1>$.
+Data for this model will come from open data from google.com, heureka.cz/heureka.sk and national governments.
+That data will be combined with calculated price indexes get from shopycrm.com tool.
 \\
 \begin{equation} \label{eq:24}
 \alpha_{xy} = \beta H(P_x-P_y) + \gamma H(Qx-Qy) + \delta H(Px-Py)H(Q_x - Q_y)
 \end{equation}
 \\
-where $\beta, \gamma, \delta$ are non-negative.
+where $\beta, \gamma, \delta$ are non-negative~\ref{vendorCoeff}.
 \\
 \begin{itemize}
     \item $P$ is prices of vendors products
@@ -96,7 +177,7 @@ Like a black friday, Cyber monday etc., in that days stores manipulate with our 
 This model return probability for customer decision to make action from interval $<0,1>$.
 \\
 \subsection{Loyalty} \label{subsec:model_loyalty}
-This models is based on Luarn & Lin research~\cite{luarn} and change it's model for our needs.
+This models is based on Luarn & Lin research~\cite{luarn} and change it's model for our needs.\\
 \begin{equation} \label{eq:30}
 L = \frac{R+Z}{Z}
 \end{equation}
@@ -109,25 +190,26 @@ L = \frac{R+Z}{Z}
 \\
 As we see on~\ref{Loyalty scheme} Loyalty model is consist of all three sub-models (Trust, Customer Satisfaction, Perceived value)
 but commitment model consist of only Trust and Customer Satisfaction.
-a,b,c,d,e .... weight coefficient to combine Trust, Customer satisfaction and Perceived value.
-
+a,b,c,d,e .... weight coefficient to combine Trust, Customer satisfaction and Perceived value.\\
+\newpage
 Trust
 \begin{equation} \label{eq:31}
 T = \frac{1}{n} \sum_{i=1}^{n} O_i
 \end{equation}
-
+\\
 $O_i$ number of orders divide number of visitors per day $i$
-
-\textbf{Customer satisfaction} are datasets get from open data per each day, individual satisfaction.
-For this situation will be simplified to average satisfaction per whole store.
-\textbf{Perceived value} is subjective value, which depends of strength of the store, data will be get from vendor model.
-\subsubsection{Commitment} \label{subsubsec:model_loyalty_commitment}
-\textbf{Commitment} is making the actual choice everyday or other period basis to keep up with something e.g. a relationship, personal goal, a task, etc.
+\\
+\\
+\textbf{Customer satisfaction}~\ref{customerSat} are datasets get from open data per each day, individual satisfaction.
+For this situation I be simplified to average satisfaction per whole store.
+\textbf{Perceived value}~\ref{perceived} is subjective value, which depend on a strength of the store.
+\subsubsection{Commitment and Loyalty} \label{subsubsec:model_loyalty_commitment}
+\textbf{Commitment} is making the actual choice every day or other period basis to keep up with something e.g. a relationship, personal goal, a task, etc.
 You would have to hold yourself accountable to keep a commitment to something or someone.
 Similarly, being loyal involves holding yourself accountable as well.
-Against of \textbf{Loyalty} which is is usually seen as a character trait rather than a conscious decision.\\
-This model return probability for customer decision to not leave the store from interval $<0,1>$.
-
+Against of \textbf{Loyalty} which is usually seen as a character trait rather than a conscious decision.
+This model return probability for customer decision to not leave the store from interval $<0,1>$.\\
+\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=140mm]{loyalty.png}
@@ -136,18 +218,13 @@ This model return probability for customer decision to not leave the store from 
     \label{Loyalty scheme}
 \end{figure}
 \subsection{Combining models to decision process} \label{subsec:combining_models}
-All separates models return probabilities vectors which we use as input to Hidden Markov model (HMM) \footnote{Hidden Markov Model (HMM) is a statistical Markov model
+All separates models return probabilities vectors which we update to square matrix which is use as input to Hidden Markov model (HMM) \footnote{Hidden Markov Model (HMM) is a statistical Markov model
 in which the system being modeled is assumed to be a Markov process with unobservable (i.e. hidden) states.
 The hidden Markov model can be represented as the simplest dynamic Bayesian network.
 The mathematics behind the HMM were developed by L. E. Baum and coworkers.
 HMM is closely related to earlier work on the optimal nonlinear filtering problem by Ruslan L. Stratonovich,
 who was the first to describe the forward-backward procedure.}
-These probabilities will be combine with specific weights coefficients to prevent always positives results.
-\section{Prediction application} \label{sec:app}
-Application will import previous data about visitors and earn of project in csv format, in admin part is able to
-create industry for setting wages to each one, than return graph results for prediction based on imported data,
-industry setting and time period.
-
+These probabilities will be combined with specific weights coefficients to always prevent positives results.
 \section{Decision process from submodels} \label{sec:decision}
 \subsection{Hidden markov model} \label{subsec:hhm}
 In a Hidden Markov Model (HMM), we have an invisible Markov chain (which we cannot observe), and each state
@@ -155,59 +232,57 @@ generates in random one out of k observations, which are visible to us. Let’s 
 Suppose we have the Markov Chain from above, with three states (snow, rain and sunshine),
 P - the transition probability matrix and q — the initial probabilities.
 This is the invisible Markov Chain — suppose we are home and cannot see the weather.
-We can, however, feel the temperature inside our room, and suppose there are two possible observations: hot and cold.
-(TODO Write a mechanism and equation to combine models to final probabilty)
-\subsection{Used software and libraries} \label{subsec:libraries}
-\begin{enumerate}
-    \item Matlab 2019b
-    \item ReGUI builder
-\end{enumerate}
-\section{Decision algoritm}
-\subsection{Flowcharts}
-\subsubsection{Overview}
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=350]{flowchart_overview}
-    \end{center}
-    \caption{Flowchart overview}
-    \label{flowchart_overview}
-\end{figure}
-\newpage
-\subsubsection{Vendor model}
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=180]{flowchart_vendor}
-    \end{center}
-    \caption{Flowchart vendor model}
-    \label{flowchart_vendor}
-\end{figure}
-\subsubsection{Psychology model}
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=180]{flowchart_psychology}
-    \end{center}
-    \caption{Flowchart psychology model}
-    \label{flowchart_psychology}
-\end{figure}
-\newpage
-\subsubsection{Loyalty model}
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=60]{flowchart_loyalty}
-    \end{center}
-    \caption{Flowchart loyalty model}
-    \label{flowchart_loyalty}
-\end{figure}
-\subsubsection{Markov hidden model}
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=230]{flowchart_markovpng}
-    \end{center}
-    \caption{Flowchart markov chain}
-    \label{flowchart_markov}
-\end{figure}
-\newpage
-\subsection{Time series}
+We can, however, feel the temperature inside our room, and suppose there are two possible observations: hot and cold.\\
+For my need I will be using 3 state model.
+Stats will be:\\
+\begin{itemize}
+    \item order
+    \item not finished order
+    \item no order decision
+\end{itemize}
+With Megaplay s.r.o owner and heureka eccomerce tool calculation data I was set probability matrix for HMM function like:\\
+$$ probabilityWages = [ 1/3 1/2 1/9; 1/3 1/2 1/9; 1/3 1/2 1/9 ]$$ \\
+Vector is updated to square matrix which is need for HMM function.\\
+\subsection{Used software, libraries and predefined functions} \label{subsec:libraries}
+\textbf{Matlab 2020a}\\
+MATLAB (matrix laboratory) is a fourth-generation high-level programming language and interactive environment for numerical
+computation, visualization and programming developed by MathWorks.\\
+\\
+\textbf{Matlab LiveScript}~\cite{livescript}\\
+MATLAB® live scripts and live functions are interactive documents that combine MATLAB code with formatted text, equations,
+and images in a single environment called the Live Editor.
+In addition, live scripts store and display output alongside the code that creates it.\\
+Use live scripts and functions to:\\
+\begin{itemize}
+    \item Visually explore and analyze problems
+    \item Share richly formatted, executable narratives
+    \item Create interactive lectures for teaching
+\end{itemize}\\
+\\
+\textbf{hhmgenerate}~\cite{hhmgenerate}\\
+The function hmmgenerate begins with the model in state 1 at step 0, prior to the first emission.
+The model then makes a transition to state $i_1$, with probability $T_{1i_1}$, and generates an emission ak1 with probability $E_{i_1k_11}$.
+hmmgenerate returns $i_1$ as the first entry of states, and $a_k_1$ as the first entry of seq.
+$[seq,states] = hmmgenerate(len,TRANS,EMIS)$ takes a known Markov model, specified by transition probability matrix $TRANS$ and emission probability matrix $EMIS$,
+and uses it to generate
+\begin{itemize}
+    \item A random sequence seq of emission symbols
+    \item A random sequence states of states
+\end{itemize}
+The length of both $seq$ and $states$ is $len$.
+$TRANS(i,j)$ is the probability of transition from state $i$ to state $j$.
+$EMIS(k,l)$ is the probability that symbol $l$ is emitted from state $k$.\\
+\\
+\textbf{hhmviterbi}~\cite{hhmviterbi}\\
+The function hmmviterbi begins with the model in state 1 at step 0, prior to the first emission.
+hmmviterbi computes the most likely path based on the fact that the model begins in state 1.
+$STATES = hmmviterbi(seq,TRANS,EMIS)$ given a $sequence, seq$, calculates the most likely path through the hidden Markov model
+specified by transition probability matrix, $TRANS$, and emission probability matrix $EMIS$. $TRANS(i,j)$ is the probability of transition from state $i$ to state $j$.
+$EMIS(i,k)$ is the probability that symbol $k$ is emitted from state $i$.\\
+\\
+\textbf{shopycrm.com}\\
+Online CRM application focused on online stores which provides all store agenda and get precalculated data which I was used for my model to simplify the prediction calculation.
+\section{Time series for setting reference values}
 \subsubsection{Moving average}
 As a first basic time series analysis we tried moving averages. These method looks like not usefull for our needs,
 because of not reflecting trend in e-commerce. Specific e-commerce trends as Christmas time and new years discounts.
@@ -230,3 +305,4 @@ result of 14,56\% aberrance from the real 2020 data.
     \caption{Time series model results}
     \label{Time series model's}
 \end{figure}
+\section{Prediction application} \label{sec:app}
