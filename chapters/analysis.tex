@@ -1,7 +1,7 @@
 % !TEX root = ../thesis.tex
 
-\chapter{Analytical part}
-\label{sec:analytical}
+\chapter{Analytical part} \label{sec:analytical}
+
 \section{Problem description} \label{sec:description}
 Most important thing for each e-commerce project is to predict behavior of their customers or visitors.
 In that complex prediction statistics methods are little bit problematic, because of they don't calculate with most of psychology
@@ -38,14 +38,14 @@ Proprietary locking is for example blocking mobile phones for only one of the op
 Overview of mathematical equation and approaches used to my prediction in context of Marketing approaches usually used to predict customer behavior.\\
 \subsection{Models} \label{subsec:models}
 \textbf{Simple Dynamic Models} \label{subsec:simpleDynamicModels}\\
-One of the simplest models that have been considered for human behavior modeling are dynamic single prices,
+One of the simplest models that have been considered for human behavior modeling are dynamic single prices~\cite{pantland},
 
 \begin{equation} \label{eq:1}
-X_k = f(x_k, t) + \xi(t)
+X_k = f(X_k, t) + \xi(t)
 \end{equation}
 \\
 where the function $f$ is dynamic evolution of vector $Xk$ at time $k$.
-Than we can define an observation process like
+Than we can define an observation process like~\cite{pantland}
 
 \begin{equation} \label{eq:2}
 Y_k = h(X_k, t) + \eta(t)
@@ -77,23 +77,23 @@ reference-point-dependent functions.\\
 \textbf{Discrete-time model} \label{subsec:discrete}\\
 Discrete models or difference equations \footnote{Difference equations can be viewed either as a discrete analogue of differential equations, or independently.
 They are used for approximation of differential operators, for solving mathematical problems with recurrences, for building various discrete
-models, etc.} are used to describe biological events or whole systems for which is natural to regret time at fixed discrete intervals.
+models, etc.} are used to describe biological events or whole systems for which is natural to regret time at fixed discrete intervals~\cite{pantland}.
 
 \begin{equation} \label{eq:4}
 \hat{X}_{k}^{(i)} = X_{k}^{*(i)} + K_k^{(i)}(Y_k - h^{(i)}(X_{k}^{*(i)},t))
 \end{equation}
 \\
 where the superscript $(i)$ denotes the $i$th Kalman's fillter.
-The measurement innovations process for the ith model.
+The measurement innovations process for the ith model~\cite{pantland}.
 
 \begin{equation} \label{eq:5}
-\Gamma_k^{(i)}= Y_k - h^{(i)}(X_k^{*(i)}), t)
+\Gamma_k^{(i)}= Y_k - h^{(i)}(X_k^{*(i)}, t)
 \end{equation}
 \\
 The measurement innovations process is zero-mean with covariance $R$.
 The ith measurement innovations process is, intuitively, the part of the observation data that is unexplained by the ith model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.
-Thus, at each time step, we calculate the probability $Pr^{(i)}$ of the m-dimensional observations $Y_k$ given the $i$th model's dynamics
+Thus, at each time step, we calculate the probability $Pr^{(i)}$ of the m-dimensional observations $Y_k$ given the $i$th model's dynamics~\cite{pantland}
 \\
 \begin{equation} \label{eq:6}
 Pr^{(i)}(Y_k|X_k^*) = \frac{exp(-\frac{1}{2}\Gamma_k^{(i)T}R^{-1}\Gamma_k^{(i)}}{(2\pi)^{m/2} Det(R)^{1/2}}
@@ -106,7 +106,7 @@ This model is then used to estimate the current value of the state variables, pr
 
 We have an observations Y as a function h of the state vector and time.
 Both $\xi$ and $\eta$ are processes with known density matrices.
-Using Kalman's result, we can then find optimal linear estimate $X_k$ using th Kalman's filter \footnote{In statistics
+Using Kalman's result, we can then find optimal linear estimate $X_k$ using th Kalman's filter~\cite{pantland} \footnote{In statistics
 and control theory, Kalman filtering, also known as linear quadratic estimation (LQE), is an algorithm that
 uses a series of measurements observed over time, containing statistical noise and other inaccuracies, and produces
 estimates of unknown variables that tend to be more accurate than those based on a single measurement alone, by estimating
@@ -128,7 +128,7 @@ Program, co-leads the World Economic Forum Big Data and Personal Data initiative
 of the Advisory Boards for Nissan, Motorola Mobility, Telefonica, and a variety of start-up firms.}, this type of prediction
 is useful only for short time periods, for instance, in the case of quick hand motions for up to one-tenth of a second.
 Especially $f$, $h$ are linear functions and $\xi$, $\eta$ are gaussian.
-This functions are commonly extended to "well-behaved" nonlinear problems by approximating the nonlinear system by linear functions
+These functions are commonly extended to "well-behaved" nonlinear problems by approximating the nonlinear system by linear functions
 using a local Taylor expansion \footnote{Taylor series is a representation of a function as an infinite sum of terms that are calculated from
 the values of the function's derivatives at a single point.}.
 
@@ -174,8 +174,10 @@ Opposite is very important in sociology because of people wanting to be differen
 \subsection{Markov Chains} \label{subsec:chain}
 A Markov chain is a process that occurs in a series of time-steps in each of which a random choice is made
 among a finite (or also enumerable) number of states; since both the index set and the state space are discrete,
-we denote by $X_n≡X(t_n)$ the transition probability can then be represented by a matrix $P=(p_{ij})$, where pij is
-the probability of moving from state i to state j: $p_{ij}=Prob[X_{n+1}=j|X_n=i]$. For homogeneous chains, these
+we denote by\\
+$X_n \equiv X(t_n)$~\cite{patel} the transition probability can then be represented by a matrix\\
+$P=(p_{ij})$~\cite{patel}, where pij is the probability of moving from state i to state j:\\
+$p_{ij}=Prob[X_{n+1}=j|X_n=i]$~\cite{patel}. For homogeneous chains, these
 probabilities do not depend on t, i.e., they are stationary. Then, the initial distribution, together with the
 transition matrix $P$, determines the probability distribution for any state at all future times.\\
 \begin{figure}[h!]
@@ -188,7 +190,7 @@ transition matrix $P$, determines the probability distribution for any state at 
 \\
 \textbf{A Markov model with social influences} \label{subsec:markov}\\
 This model is based on Markov chains (Markov chain description), better than the time continues differential
-equations which are especially use.
+equations which are especially used.
 To use that model approach we first have to develop the possibility of a decoy effect.
 Then we introduce sociology and obtain results for lock-in analogous.
 These Markov models display both important similarities to and differences from the previous models, and may be simpler to work with.
@@ -197,7 +199,7 @@ The last but not least pros of that models is very good graphical representation
 \textbf{An Experiment Using Markov Dynamic Models} \label{subsec:markov_dynamic}\\
 Shopping is natural-feeling and familiar type of human behavior that exhibits complex patterns that last from several
 seconds to many days.
-These characteristics make shopping little bit nearly ideal experimental for modeling human behaviors.
+These characteristics make shopping little nearly ideal experimental for modeling human behaviors.
 In the case of shopping, the macroscopic actions are events like needs, choosing brands, choosing seller.
 The internal states are the individual steps that make up the action, and the observed variables will be changes during the shopping process
 workflow in which can be customer decision changed.
@@ -215,7 +217,7 @@ a buying shoes by a single woman in production age.\\
 \\
 Psychology covers what, and how, aspects of the actual items on the shelves influence people to make their choices,
 possibly buying something different from previously.
-Advertising might be comprise into these characteristics but could also possibly be considered as part of the sociological
+Advertising might be comprised into these characteristics but could also possibly be considered as part of the sociological
 influences (point 1 and 2), especially if the advertising takes the form of a well known figure endorsing a product.
 More specifically, the following four properties have been identified by Unilever Research~\cite{patel} as being important
 and their influences were included in one or more models:
@@ -223,7 +225,7 @@ and their influences were included in one or more models:
 \begin{enumerate}
 	\item Minimise anticipated regret.
 	This refers to how just two products compare with each other as regards different qualities, which can include
-	price (or 'affordability' = 1/price).
+	price (or affordability = 1/price).
 	A customer might judge one item to be superior to another in all respects.
 	The first is then a safe choice for the customer.
 	\item Attribute change.
@@ -241,6 +243,7 @@ and their influences were included in one or more models:
 	With three or more, comparisons might be made between two things at a time, one could be eliminated and then the winner contrasted
 	with a third.
 \end{enumerate}
+
 \subsection{Viterbi algorithm} \label{subsec:viterbi}
 The Viterbi algorithm is a dynamic programming algorithm for finding the most likely sequence of hidden
 states called the Viterbi path that results in a sequence of observed events, especially in the
@@ -252,7 +255,7 @@ linguistics, and bioinformatics.
 For example, in speech-to-text (speech recognition), the acoustic signal is treated as the observed sequence of events,
 and a string of text is considered to be the "hidden cause" of the acoustic signal.
 The Viterbi algorithm finds the most likely string of text given the acoustic signal.
-Here you can see Viterbi algoritm implementation in Python language: \\
+Here you can see Viterbi algoritm implementation in Python language:~\cite{DBLP:journals/corr/abs-cs-0504020} \\
 \begin{lstlisting}[language=python]
 # probability == p. Tm: the transition matrix. Em: the emission matrix.
 function viterbi(O, S, Π, Tm, Em): best_path
@@ -282,6 +285,7 @@ function viterbi(O, S, Π, Tm, Em): best_path
 	\caption{Viterbi algorithm schema example}
 	\label{Viterbi schema}
 \end{figure}
+
 \subsection{Predicted effects} \label{subsec:predicted}
 \begin{enumerate}
 	\item How a decoy product might influence the market.
@@ -304,7 +308,7 @@ function viterbi(O, S, Π, Tm, Em): best_path
 	This question is complementary to that of the decoy, asking what market share a new product will gain rather than how it will
 	affect the market shares of existing products.
 
-	\item Choice overload: when there are just too many possible options for potential customers to pick from, and many
+	\item A choice overload: when there are just too many possible options for potential customers to pick from, and many
 	will search the sites without making a purchase.
 \end{enumerate}
 
@@ -326,7 +330,7 @@ Of interest is the case when a third brand is added, possibly as a decoy.
 The additional brand means that the preference distribution changes from being a straight line in the two-dimensional plane $(A, B)$,
 to a plane in three-dimensional space $(A,B,C)$.\\
 \\
-\textbf{Customer decision process} \label{sec:decision}\\
+\textbf{Customer decision process} \label{sec:cus_decision}\\
 Described in~\cite{patel} show that the standard Logit model~\ref{subsec:logit} for customer choice assumes that
 the probability, $p_i$, with which a customer buys a given product $i$ from a range of products $<1, n>$ depends on
 the value which customer attaches to that product $V_i$, and the price of the product $P_i$.
@@ -334,10 +338,10 @@ This dependence is taken to be of exponential form.
 Assuming that guaranteeing that all probabilities are positive)
 \\
 \begin{equation} \label{eq:7}
-p_i = C exp(V_i - P_i)
+p_i = C~exp(V_i - sP_i)
 \end{equation}
 \\
-where $s$ is a measure of the relative importance of price to the customer, and $C$ is a normalisation constant chosen so that
+where $s$ is a measure of the relative importance of price to the customer, and $C$ is a normalisation constant chosen so that~\cite{patel}
 \\
 \begin{equation} \label{eq:8}
 \sum_{i=1}^n p_i = 1
@@ -346,7 +350,7 @@ where $s$ is a measure of the relative importance of price to the customer, and 
 The value $V_i$ is then taken to reflect the influence on the customer of the quality of the product,$Q_i$,
 the increased likelihood of the customer buying the same brand as he bought previously (the loyalty effect),
 and the peoples who have an influence on a customer (neighbours).
-Each of these dependencies are taken to be linear, giving
+Each of these dependencies are taken to be linear, giving~\cite{patel}
 \\
 \begin{equation} \label{eq:9}
 V_i = aQ_i + lI_i + hN_i,
@@ -377,7 +381,7 @@ Consider a linear flux $\alpha_{xy}$ of preferences moving to brand $X$ from bra
 All fluxes have to be strictly positive.
 It's in improper to consider negative flux, so really excluded is only zero value.
 Flux is the proportion of customer preference to switch to other brand or product from previous one.
-In a two brand or two producst market we have these final equations
+In a two brand or two producst market we have these final equations~\cite{patel}
 
 \begin{equation} \label{eq:10}
 \begin{array}{r@{}l}
@@ -389,7 +393,7 @@ A(t) + B(t) = 1
 
 \subsection{New brand/product on the market} \label{subsec:newbrand}
 Equation from the previous point ve can easily extend in the situation like a new product or brand is enter
-stable market and change customer behavior.
+stable market and change customer behavior~\cite{patel}.
 
 \begin{equation} \label{eq:11}
 \begin{array}{r@{}l}
@@ -429,7 +433,8 @@ will choose to buy product 1 (since product 1 will win in any comparison between
 product 3 acts as a decoy, channelling consumers to product 1. Let us assume that the probability of choosing
 product 3 over product 2 in a comparison is p.\\
 The probability of reaching any leaf in the decision tree is simply the product of the probabilities of
-taking each branch required to get there    . Thus, after introducing product 3 the probabilities of choosing each product are\\
+taking each branch required to get there.
+Thus, after introducing product 3 the probabilities of choosing each product are~\cite{patel}\\
 \\
 \begin{equation} \label{eq:12}
 \begin{array}{l@{}l}
@@ -451,7 +456,7 @@ to product 1, and that all the competitors are equivalent from the point of view
 Then we can lump all the competitors into a single product number 2, with the main change to the decision tree
 being to the chance of choosing products to compare. Of course it is now possible that the consumer
 chooses to compare two competitors products, and we must take this into account. The new decision tree is shown in Fig. 12.
-The probabilities of choosing each product are
+The probabilities of choosing each product are~\cite{patel}
 \\
 \begin{equation} \label{eq:13}
 \begin{array}{l@{}l}
@@ -474,7 +479,7 @@ We see that there is no decoy effect. Product 1 has exactly the same market shar
 Let us now go back to just three products, and assume that the consumer does not stop at one level of comparison,
 but takes the winner of the first comparison and compares it with the remaining product. In this case
 we have the level 2 decision tree shown in Fig. 13. Note that for the second comparison there is no
-choice of products to compare, since there is only one product remaining. The probabilities of choosing each product are now\\
+choice of products to compare, since there is only one product remaining. The probabilities of choosing each product are now~\cite{patel}\\
 \begin{equation} \label{eq:14}
 \begin{array}{l@{}l}
 p_1 = \frac{1}{6}+\frac{1}{6}+\frac{p}{3}+\frac{1-p}{6}=\frac{1}{2}+\frac{p}{6} \\
@@ -500,16 +505,16 @@ Each node, as loyalty, is influenced by the preceding nodes through a coefficien
 We have taken the interaction between the nodes so that (I, J) is affected only by its two immediate neighbours,
 (I − 1, J) and (I, J − 1), and both exert the same influence per individual (the area of influence is easy to generalize).
 In our simulations, the coefficients κkIJ and λIJ are positive and randomly chosen from a uniform distribution.
-Consumer (I,J) forms an opinion or view, in the form of a composite numerical value, on product i according to
+Consumer (I,J) forms an opinion or view, in the form of a composite numerical value, on product i according to~\cite{pantland}
 $$V_{IJ}^{i} = \sum_k K_{IJ}^kQ_{ki} + \lambda_{IJ}(V_{I-1,J}^1+V_{I,J-1}^i), for I > 0, J > 0$$
 \\
 \textbf{Binary comparisons} \label{subsec:binary}\\
 Suppose a customer chooses to compare product i with product $j$.
 What is the probability that he will choose $i$ over $j$?
-In the Logit model we would simply have
+In the Logit model we would simply have~\cite{pantland}
 \\
 \begin{equation} \label{eq:15}
-p_i = C exp(V_i - P_i), p_j = C exp(V_j - P_j)
+p_i = C~exp(V_i - sP_i), p_j = C~exp(V_j - sP_j)
 \end{equation}
 \\
 where $C$ is chosen so that $p_i + p_j = 1$.
@@ -541,7 +546,7 @@ This will depend on the customer but also on the characteristics of each product
 The sociology of individuals can be considered as a form of particle-particle interaction.
 Following what has gone before, the product space is defined by just two characteristics for each product $i$ with affordability $P_i$ and quality $Q_i$.
 We can define the ‘strength’ \footnote{ thw power if the product or service to be attractive for customer} of a product as the distance
-of the product from the origin in product space as
+of the product from the origin in product space as~\cite{pantland}
 \\
 \begin{equation} \label{eq:16}
 Ui = (Pi + Qi)/2
@@ -552,7 +557,7 @@ All the products with $Pi + Qi = constant$ will have the same strength.
 \subsection{Dynamics of market share} \label{subsec:marketshare}
 Market shares don't unusually depend in their qualitative behavior, on the coefficients $\alpha_{ij}$ and the values
 of $\alpha_{ij}$ grow up as fast as their tend towards stability values.
-In the situation  that $\alpha_{ij} \geq 0$ and $\alpha_{ij} + \alpha_{ji} > 0$ for $i \neq j$ the linear system looks like
+In the situation  that $\alpha_{ij} \geq 0$ and $\alpha_{ij} + \alpha_{ji} > 0$ for $i \neq j$ the linear system looks like~\cite{patel}
 \\
 \begin{equation} \label{eq:17}
 \frac{dX_i}{dt} = \sum_ja_{ij}X_j
@@ -615,7 +620,7 @@ A value of 2.0 means that there is no autocorrelation detected in the sample.} o
 \\
 \textbf{Forecasting with Single Exponential Smoothing} \label{subsec:statistics_forecast}
 \\
-The forecasting formula is the basic equation
+The forecasting formula is the basic equation~\cite{benkova}
 \begin{equation} \label{eq:21}
 S_t+1 = \alpha y_t+(1−\alpha)S_t, 0< \alpha \leq 1,t>0
 \end{equation}
@@ -630,7 +635,7 @@ In other words, the new forecast is the old one plus an adjustment for the error
 \\
 \textbf{Bootstrapping of Forecasts}\\
 If you wish to forecast from some origin, usually the last data point, and no actual observations are available
-we have to modify the formula to become:
+we have to modify the formula to become~\cite{benkova}:
 \\
 \begin{equation} \label{eq:23}
 S_t+1 = \alpha y_{org}+(1−\alpha)S_t

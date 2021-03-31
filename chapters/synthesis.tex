@@ -153,7 +153,7 @@ In this model we will simplify only for price effect~\ref{subsubsec:model_psycho
 \end{itemize}
 \\
 \begin{equation} \label{eq:27}
-\alpha_{ij} = \frac{C+d(Q_j, \overset{-}{Q})}{C+d(Q_i, \overset{-}{Q})}
+\alpha_{ij} = \frac{C+max(Q_j, \overset{-}{Q})}{C+max(Q_i, \overset{-}{Q})}
 \end{equation}
 \\
 Coefficient C is used to be $\alpha_{ij}$ always positive.
@@ -171,7 +171,7 @@ Like a black friday, Cyber monday etc., in that days stores manipulate with our 
 \end{itemize}
 \\
 \begin{equation} \label{eq:29}
-\alpha_{ij} = \frac{C+d(P_j, \overset{-}{P})}{C+d(P_i, \overset{-}{P})}
+\alpha_{ij} = \frac{C+max(P_j, \overset{-}{P})}{C+max(P_i, \overset{-}{P})}
 \end{equation}
 \\
 This model return probability for customer decision to make action from interval $<0,1>$.
@@ -225,7 +225,7 @@ The mathematics behind the HMM were developed by L. E. Baum and coworkers.
 HMM is closely related to earlier work on the optimal nonlinear filtering problem by Ruslan L. Stratonovich,
 who was the first to describe the forward-backward procedure.}
 These probabilities will be combined with specific weights coefficients to always prevent positives results.
-\section{Decision process from submodels} \label{sec:decision}
+\section{Decision process from sub-models} \label{sec:decision}
 \subsection{Hidden markov model} \label{subsec:hhm}
 In a Hidden Markov Model (HMM), we have an invisible Markov chain (which we cannot observe), and each state
 generates in random one out of k observations, which are visible to us. Let’s look at an example.
@@ -240,8 +240,15 @@ Stats will be:\\
     \item not finished order
     \item no order decision
 \end{itemize}
-With Megaplay s.r.o owner and heureka eccomerce tool calculation data I was set probability matrix for HMM function like:\\
-$$ probabilityWages = [ 1/3 1/2 1/9; 1/3 1/2 1/9; 1/3 1/2 1/9 ]$$ \\
+With Megaplay s.r.o owner and heureka e-comerce tool calculation data I was set probability wages matrix for HMM function like:\\
+\begin{equation*}
+    P_w =
+    \begin{pmatrix}
+        \frac{1}{3} & \frac{1}{2} & \frac{1}{9} \\
+        \frac{1}{3} & \frac{1}{2} & \frac{1}{9} \\
+        \frac{1}{3} & \frac{1}{2} & \frac{1}{9}
+    \end{pmatrix}
+\end{equation*}\\
 Vector is updated to square matrix which is need for HMM function.\\
 \subsection{Used software, libraries and predefined functions} \label{subsec:libraries}
 \textbf{Matlab 2020a}\\
