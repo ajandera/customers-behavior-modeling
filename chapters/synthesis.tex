@@ -3,19 +3,18 @@
 \chapter{Syntactic part}
 \label{sec:methodology}
 \section{Goal of the work} \label{sec:goal}
-Based on the analytical part~\ref{sec:analytical} I will be working on a mathematical model to predict customer behavior consist of vendor,
-psychology and loyalty sub-models combine in hidden markov model (HMM) to final prediction model.
+Based on the analytical part~\ref{sec:analytical} we will be working on a mathematical models to predict customer behavior consist of vendor, psychology and loyalty sub-models combine in hidden markov model (HMM) to final prediction model.
 States in the HMM will be read by viterbi algoritm~\ref{subsec:viterbi} which is able to predict most probability state in propagation by HMM.
-I try to get a better results than actual standard statistic method (Time Series analysis)~\ref{sec:statistics} to predict customer behavior in e-commerce.
-In the final my model will be able to predict online store future earn from previous earn and previous number of visitors.
-For successfully prediction we will use some open data about store strength and customer satisfaction and some predefined and computed variables from store.
+We try to get a better results than actual standard statistical methods (Time Series analysis)~\ref{sec:statistics} to predict customer behavior in e-commerce.
+In the final our model will be able to predict online store future income from previous income and number of visitors.
+For successfully prediction we will use some open data for store strength and customer satisfaction and some predefined and computed variables from store.
 \section{Modeling prediction of customer behavior} \label{sec:modeling}
-The goal of model is to predict probability that customer will successfully finish order.
+The goal of model is to predict if customer will successfully finish order or leave store without make an order.
 This model will be consists of three sub-models.
 Vendor model,\ psychology model and loyalty model.
 All sub-models will be combined to complex prediction mechanism, as you can see on image~\ref{Model schema with interaction}
 To final prediction will be used Hidden Markov model in combination with Viterbi algorithm to detect hidden states to reflect set weights and get better results for each industry.
-Weights for model are industry dependent and for my modeling I set them from Megaplay s.r.o data and with cooperation with the owner of Megaplay s.r.o who has more than 10 years of experience in that industry, so he is the right person to know that kind of business.
+Weights for model are industry dependent and for my modeling we set them from Megaplay s.r.o data and with cooperation with the owner of Megaplay s.r.o who has more than 10 years of experience in that industry, so he is the right person to know that kind of business.
 \\
 \begin{figure}[h!]
     \begin{center}
@@ -38,30 +37,30 @@ This prepared data I will add to the Matlab live script file to be used for pred
 This value was calculated from anonymize user data from Google Analytics tool used their prediction mechanism to get number of future users based on previous a number of visitors.\\
 \\
 \textbf{Perceived value for psychology model} \label{perceived}\\
-This variable is needed for loyalty model~\ref{subsec:model_loyalty} and is a get from open e-commerce compare data from Heureka.cz/Heureka.sk internal tool.\\
+This variable is needed for loyalty model~\ref{subsec:model_loyalty} and comes from an open e-commerce compare data provided by Heureka.cz/Heureka.sk internal tool.\\
 \\
 \textbf{Number of orders 2018 - 2019}\\
-Number of orders get from shopycrm.com tool which is used in Megaplay s.r.o to manage their business\\
+Number of orders get from shopycrm.com tool used in Megaplay s.r.o to manage their business processes and store all needed data.\\
 \\
 \textbf{Unique products sell}\\
 This variable is used in Psychology model~\ref{subsec:model_psychology} for Price aspect calculation~\ref{eq:26}.\\
 \\
 \textbf{Customer satisfaction} \label{customerSat}\\
-This value if from Heureka open data, and it's a calculated value from the all customer reviews of the store.\\
+This value is provided by Heureka open data, and it's a calculated value from the all customer reviews of the store.\\
 \\
 \textbf{Margin}\\
 The retail margin percentage measures the retail margin as a percentage of the retail price.
 This measurement gives you a context for the retail margin.
-For example, if you have a 5~€ retail margin on two different products, but one costs 150~€ and one costs 10~€, the second product would have a much higher retail margin percentage.\\
+For example, if you have a 5~€ retail margin on two different products, but one costs 150~€ and next one costs 10~€, the second product would have a much higher retail margin percentage.\\
 \\
 \textbf{Number of product order each day $Q_i$}\\
-This is a calculated value from shopycrm.com about number of product order for each
-It's used in Psychology model~\ref{subsec:model_psychology} \\
+This is a calculated value from shopycrm.com about number of product order for each one.
+It's used in Psychology model~\ref{subsec:model_psychology}. \\
 \\
 \textbf{Quality index $Q_1$}\\
-This is vendor quality index get from Heureka open data.
-This is a power of the store.
-Higher number mean that for a customer is more difficult to leave our store and go to another online store.\\
+This is vendor quality index provided by Heureka open data.
+This is a power/strength of the store.
+Higher number mean that for a customer is more difficult to leave the store and go to another online store.\\
 \\
 \textbf{Vendor coefficients $\beta, \gamma, \delta$} \label{vendorCoeff}\\
 This three coefficients are used as weight for vendor model~\ref{subsec:model_vendors} and was set with cooperation with Megaplay s.r.o owner for their industry.
@@ -111,15 +110,15 @@ It's represent the relation between vendor prices and vendor quality.\\
 \end{table}
 \\
 \subsection{Vendors} \label{subsec:model_vendors}
-For simplification, I will take to account only a two vendors market share, without 100\% domination, because of on a real
-market is 100\% monopole unlikely see and then I will be reflected only main competitor.
-From that condition it will see that for market dominate vendor it will return false positive results.
+For simplification, we will take to account only a two vendors market share, without 100\% domination, because of on a real
+market is 100\% monopole unlikely see and then we will be reflected only main competitor.
+From that condition it is evident that for market dominate vendor it will return false positive results.
 Our model is based on equations from Brands section~\ref{eq:10} and from those equations we will get probability of vendor change from
 vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$ it will break the computation and customer
 will leave our store without successfully completing buy process.
 Results of this computation wil be probability for each iteration of buy process simulation in an interval $<0,1>$.
-Data for this model will come from open data from google.com, heureka.cz/heureka.sk and national governments.
-That data will be combined with calculated price indexes get from shopycrm.com tool.
+Data for this model will comes from open data provided by google.com, heureka.cz/heureka.sk and national governments.
+That data will be combined with calculated price indexes downloaded from shopycrm.com tool.
 \\
 \begin{equation} \label{eq:24}
 \alpha_{xy} = \beta H(P_x-P_y) + \gamma H(Qx-Qy) + \delta H(Px-Py)H(Q_x - Q_y)

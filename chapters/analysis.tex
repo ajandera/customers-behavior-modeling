@@ -2,24 +2,22 @@
 
 \chapter{Analytical part} \label{sec:analytical}
 
-\section{Problem description} \label{sec:description}
-Most important thing for each e-commerce project is to predict behavior of their customers or visitors.
-In that complex prediction statistics methods are little bit problematic, because of they don't calculate with most of psychology
-and sociology aspects.
-From statistic methods we can get some basic framework of our prediction income, but in many cases the reality
-of the products life can be really different and can crash company business model.
-So we are trying to find complex models to predict company income to reflect business plan.
+\section{Introduction to the issue} \label{sec:description}
+Each e-commerce project solves how to predict behavior of their cunsumers or visitors.
+In that complex prediction we usually use statistics methods~\ref{subsec:statistics} to get an idea of behavior of our customers. Basically we needs to calculate conversion rate, bounce rate, earn value per order and per customer. Problem of that values is their nonpredictable state by ordinary methods. Based on Time series analysis we are able to predict future income. On that method we can found a problem, because of they don't calculate with most of psychology and sociology aspects.
+There are many statistic methods usable for income prediction, but in many cases the reality
+of the products life have to be really different and these non relevant data will make managerial decisions more difficult to reflect prediction in company business model and cash flow.
+So we are trying to find complex models to predict company income with minimal aberration.
 The best approach is the create business plans with that modeling before, so we can minimize the risk of our business.
 Two phenomena of particular interest for assessing modelling options are the~\ref{subsec:decoy} and~\ref{subsec:lock-in} principles.
-As is written in~\cite{patel}, this modelling is especially used when  the new brand or product is established.
+As is written in~\cite{patel}, this modelling is especially used when the new brand or product is established.
 But not in stores on daily basis.
 This is caused by the research cost for that studies.\\
 \\
 \textbf{Decoy effect} \label{subsec:decoy}\\
 The Decoy Effect or the Asymmetric Dominance Effect is a cognitive bias in which consumers will tend to have a specific
 change in preferences between two vendor options when also presented with a third option that is asymmetrically dominated.
-Simply put when there is a third strategically important choice, aka the decoy, then the consumer is more likely to
-choose the more expensive of the other two options.
+Simply put when there is a third strategically important choice, like the decoy, then the consumer is more likely to choose the more expensive of the other two options.
 An option is asymmetrically dominated when it is inferior in all respects to one option.
 However, in comparison to the other option, it is inferior in some respects and superior in others.
 In other words, it is completely dominated by one option and only partially dominated by the other.
@@ -28,14 +26,14 @@ option than when the asymmetrically dominated option is absent.
 The asymmetrically dominated option is therefore a decoy serving to increase preference for the dominating option.\\
 \\
 \textbf{Lock-in} \label{subsec:lock-in}\\
-Proprietary lock-in, or customer lock, makes the customer dependent on the products and services of a particular
+Proprietary lock-in, or consumer lock, makes the consumer dependent on the products and services of a particular
 entity by creating significant costs of switching to the products and services of others.
 This can be achieved, for example, by the use of non-standardized patented product components.
 Locking, which creates barriers to market entry, can be avoided by antitrust measures.
 Proprietary locking is for example blocking mobile phones for only one of the operators or DRM.
 
 \section{Mathematical Background and Marketing introduction} \label{sec:introduction}
-Overview of mathematical equation and approaches used to my prediction in context of Marketing approaches usually used to predict customer behavior.\\
+Overview of mathematical equations and approaches used to our prediction in context of Marketing approaches usually used to predict consumer behavior.\\
 \subsection{Models} \label{subsec:models}
 \textbf{Simple Dynamic Models} \label{subsec:simpleDynamicModels}\\
 One of the simplest models that have been considered for human behavior modeling are dynamic single prices~\cite{pantland},
@@ -52,7 +50,7 @@ Y_k = h(X_k, t) + \eta(t)
 \end{equation}
 \\
 \textbf{Multiple Dynamic Models} \label{subsec:multipleDynamicModels}\\
-Human behavior is usually not as simple as a single dynamic model.
+The consumer behavior is usually not as simple as a single dynamic model.
 For complex model of human behavior we can use some alternatives.
 In many case we have to use different models for each person's dynamic response~\cite{wilsky}.
 Than we can test each instance of response to predict person's state.
@@ -71,8 +69,7 @@ to other brands, and it is therefore appropriate for preference change to be mod
 of brands in each quality, the simplest perhaps being to assign a positive score to a brand for each successful comparison.
 Thus customers attempt to minimize their anticipated regret by opting – on any particular quality – for the safe bet.
 More sophisticated customer behavior, capable of not only ranking brands but discriminating according to the size of proximity gap
-requires more complex modelling, but may be justified since it appears that subjective attribute valuations at least are nonlinear,
-reference-point-dependent functions.\\
+requires more complex modelling, but may be justified since it appears that subjective attribute valuations at least are nonlinear, reference-point-dependent functions.\\
 \\
 \textbf{Discrete-time model} \label{subsec:discrete}\\
 Discrete models or difference equations \footnote{Difference equations can be viewed either as a discrete analogue of differential equations, or independently.
@@ -141,7 +138,7 @@ products in the marketplace, brand marketing strategy, seller trust and professi
 In order to design the best product, it is necessary to understand not just the physics and chemistry of the product,
 but also the psychology of customers and the sociology of customer groups or networks.\cite{patel}
 
-From that paragraphs is see that the general human behavior model has many input variables to represent many kind
+From that paragraphs is see that the general customer behavior model has many input variables to represent many kind
 of situation to be successfully in future prediction.
 Good model in store industry have to be able to learn from actual customer's behavior for each seller and learn
 from these datasets in a macroscopic, averaged way.
