@@ -157,7 +157,7 @@ In this model we will simplify only for price effect~\ref{subsubsec:model_psycho
 \\
 Coefficient C is used to be $\alpha_{ij}$ always positive.
 \subsubsection{Center of mass aspect} \label{subsubsec:model_psychology_mass}
-Center of mass aspect is applied as a part of sociology to our psyhology.
+Center of mass aspect is applied as a part of sociology to our psyhology model.
 Marketers use it to manipulate with customers in global way.
 Like a black friday, Cyber monday etc., in that days stores manipulate with our psychology by discount prices.
 \\
@@ -173,10 +173,10 @@ Like a black friday, Cyber monday etc., in that days stores manipulate with our 
 \alpha_{ij} = \frac{C+max(P_j, \overset{-}{P})}{C+max(P_i, \overset{-}{P})}
 \end{equation}
 \\
-This model return probability for customer decision to make action from interval $<0,1>$.
+This model returns probability for customer decision to make action from interval $<0,1>$.
 \\
 \subsection{Loyalty} \label{subsec:model_loyalty}
-This models is based on Luarn & Lin research~\cite{luarn} and change it's model for our needs.\\
+This models is based on Luarn & Lin research~\cite{luarn} and we change theirs model for our needs.\\
 \begin{equation} \label{eq:30}
 L = \frac{R+Z}{Z}
 \end{equation}
@@ -200,12 +200,12 @@ $O_i$ number of orders divide number of visitors per day $i$
 \\
 \\
 \textbf{Customer satisfaction}~\ref{customerSat} are datasets get from open data per each day, individual satisfaction.
-For this situation I be simplified to average satisfaction per whole store.
+For simplified the situation we will use average satisfaction per whole store.
 \textbf{Perceived value}~\ref{perceived} is subjective value, which depend on a strength of the store.
 \subsubsection{Commitment and Loyalty} \label{subsubsec:model_loyalty_commitment}
 \textbf{Commitment} is making the actual choice every day or other period basis to keep up with something e.g. a relationship, personal goal, a task, etc.
-You would have to hold yourself accountable to keep a commitment to something or someone.
-Similarly, being loyal involves holding yourself accountable as well.
+We would have to hold ourself accountable to keep a commitment to something or someone.
+Similarly, being loyal involves holding ourself accountable as well.
 Against of \textbf{Loyalty} which is usually seen as a character trait rather than a conscious decision.
 This model return probability for customer decision to not leave the store from interval $<0,1>$.\\
 \\
@@ -227,19 +227,22 @@ These probabilities will be combined with specific weights coefficients to alway
 \section{Decision process from sub-models} \label{sec:decision}
 \subsection{Hidden markov model} \label{subsec:hhm}
 In a Hidden Markov Model (HMM), we have an invisible Markov chain (which we cannot observe), and each state
-generates in random one out of k observations, which are visible to us. Let’s look at an example.
+generates in random one out of $k$ observations, which are visible to us. Let’s look at an example.
 Suppose we have the Markov Chain from above, with three states (snow, rain and sunshine),
-P - the transition probability matrix and q — the initial probabilities.
+$P$ - the transition probability matrix and $q$ — the initial probabilities.
 This is the invisible Markov Chain — suppose we are home and cannot see the weather.
 We can, however, feel the temperature inside our room, and suppose there are two possible observations: hot and cold.\\
-For my need I will be using 3 state model.
-Stats will be:\\
+For our need we will create 3 states model.
+States will be:\\
 \begin{itemize}
     \item order
     \item not finished order
     \item no order decision
 \end{itemize}
-With Megaplay s.r.o owner and heureka e-comerce tool calculation data I was set probability wages matrix for HMM function like:\\
+With Megaplay s.r.o owner and heureka e-comerce tool calculation data we were set probability wages vector for HMM function like:\\
+$$ p_w = \left(\frac{1}{3} & \frac{1}{2} & \frac{1}{9}\right) $$
+\\
+Vector have to be updated to square matrix which is used in HMM function.\\
 \begin{equation*}
     P_w =
     \begin{pmatrix}
@@ -248,14 +251,14 @@ With Megaplay s.r.o owner and heureka e-comerce tool calculation data I was set 
         \frac{1}{3} & \frac{1}{2} & \frac{1}{9}
     \end{pmatrix}
 \end{equation*}\\
-Vector is updated to square matrix which is need for HMM function.\\
+\\
 \subsection{Used software, libraries and predefined functions} \label{subsec:libraries}
 \textbf{Matlab 2020a}\\
 MATLAB (matrix laboratory) is a fourth-generation high-level programming language and interactive environment for numerical
 computation, visualization and programming developed by MathWorks.\\
 \\
 \textbf{Matlab LiveScript}~\cite{livescript}\\
-MATLAB® live scripts and live functions are interactive documents that combine MATLAB code with formatted text, equations,
+MATLAB live scripts and live functions are interactive documents that combine MATLAB code with formatted text, equations,
 and images in a single environment called the Live Editor.
 In addition, live scripts store and display output alongside the code that creates it.\\
 Use live scripts and functions to:\\
@@ -266,11 +269,11 @@ Use live scripts and functions to:\\
 \end{itemize}\\
 \\
 \textbf{hhmgenerate}~\cite{hhmgenerate}\\
-The function hmmgenerate begins with the model in state 1 at step 0, prior to the first emission.
-The model then makes a transition to state $i_1$, with probability $T_{1i_1}$, and generates an emission ak1 with probability $E_{i_1k_11}$.
-hmmgenerate returns $i_1$ as the first entry of states, and $a_k_1$ as the first entry of seq.
+The function $hmmgenerate$ begins with the model in state 1 at step 0, prior to the first emission.
+The model then makes a transition to state $i_1$, with probability $T_{1i_1}$, and generates an emission $a_k_1$ with probability $E_{i_1k_11}$.
+$hmmgenerate$ returns $i_1$ as the first entry of states, and $a_k_1$ as the first entry of seq.
 $[seq,states] = hmmgenerate(len,TRANS,EMIS)$ takes a known Markov model, specified by transition probability matrix $TRANS$ and emission probability matrix $EMIS$,
-and uses it to generate
+and uses it to generate:\\
 \begin{itemize}
     \item A random sequence seq of emission symbols
     \item A random sequence states of states
@@ -280,19 +283,19 @@ $TRANS(i,j)$ is the probability of transition from state $i$ to state $j$.
 $EMIS(k,l)$ is the probability that symbol $l$ is emitted from state $k$.\\
 \\
 \textbf{hhmviterbi}~\cite{hhmviterbi}\\
-The function hmmviterbi begins with the model in state 1 at step 0, prior to the first emission.
+The function $hmmviterbi$ begins with the model in state 1 at step 0, prior to the first emission.
 hmmviterbi computes the most likely path based on the fact that the model begins in state 1.
 $STATES = hmmviterbi(seq,TRANS,EMIS)$ given a $sequence, seq$, calculates the most likely path through the hidden Markov model
 specified by transition probability matrix, $TRANS$, and emission probability matrix $EMIS$. $TRANS(i,j)$ is the probability of transition from state $i$ to state $j$.
 $EMIS(i,k)$ is the probability that symbol $k$ is emitted from state $i$.\\
 \\
 \textbf{shopycrm.com}\\
-Online CRM application focused on online stores which provides all store agenda and get precalculated data which I was used for my model to simplify the prediction calculation.
+Online CRM application focused on e-commerce stores which provides all store workflows and get precalculated data which we will use for our models to simplify the prediction calculation.
 \newpage
 \section{Time series for setting reference values} \label{sec:timeseries}
-Based on Statistic solution chapter~\ref{sec:statistics} I create four statistic approaches to predict 1/2020 income for store based on previous data from years 2018 and 2019.
+Based on statistical solution chapter~\ref{sec:statistics} we create four statistical approaches to predict 1/2020 income for store based on previous data from years 2018 and 2019.
 This previous income can be found in appendix A Reference data~\ref{reference_data}.
-For make a point of view look on graph~\ref{income} with income data.\\
+To have a better idea about a point of view look on graph~\ref{income} with income data.\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=150mm]{income.png}
@@ -301,11 +304,11 @@ For make a point of view look on graph~\ref{income} with income data.\\
     \label{income}
 \end{figure}
 \subsubsection{Moving average}
-Like a first basic time series analysis I tried moving averages.
-These method looks like not useful for our needs, because of not able to reflecting trend in
-Specific e-commerce trends as Christmas time and new years discounts.
-For my prediction reference data I will create prediction with moving average $n=3$ and $n=5$.
-Here you can see part of code in Matlab to create the simulation, than you can see results in graph~\ref{moving_average_3}
+Like a first basic time series analysis we tried moving averages.
+This method looks like not useful for our needs, because of not able to reflecting trend in
+specific e-commerce trends as Christmas time and new years discounts.
+For our prediction reference data we will create prediction with moving average $n=3$ and $n=5$.
+Here you can see part of code in Matlab to create the prediction, than you can see results in graph~\ref{moving_average_3}
 for $n=3$ and on the next graph~\ref{} for $n=5$\\
 \\
 \textbf{Calculation for n=3}\\
@@ -376,8 +379,8 @@ Result from this prediction for 1/2020 are 3 274 399 Kč and it's aberration is 
     \label{moving_average_5}
 \end{figure}
 \subsubsection{Models}
-After moving average I use two models for linear regression to predict other reference data by better statistic solutions.
-I will test these two models:
+After moving average we use two models for linear regression to predict other reference data by better statistical solutions.
+We will use these two models:
 \begin{itemize}
     \item $Tr_{t1}=a_0+a_1t$
     \item $Tr_{t2}=a_0+a_1t+a_2t^2$
@@ -419,10 +422,10 @@ Trt2 = a0+a1.*t+a2.*t.^2;
 PredictionTrt2 = a0+a1*25+a2*25^2
 \end{lstlisting}\\
 \\
-Better results I get from model $Tr_{t2}=a_0+a_1t+a_2t^2$ as is see in graph~\ref{ts_models}.
-The goal of this thesis is not about to find the best statistics solution in time series, so for my purpose this model is enough as a reference.
-Time series analysis for better model get the result with aberration of 14,56\% from the real 2020 data.
-All model results you can see in evaluation part~\ref{evaluation}.\\
+We got better results from model $Tr_{t2}=a_0+a_1t+a_2t^2$ as you can see on graph~\ref{ts_models}.
+The goal of this thesis is not about to find the best statistical solutions in time series, so for our purpose this model is enough as a reference.
+Time series analysis for better model have the results with aberration of 14,56\% from the real 2020 income.
+All models result you can see in evaluation part~\ref{evaluation}.\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=140mm]{model_ts.png}
@@ -432,13 +435,10 @@ All model results you can see in evaluation part~\ref{evaluation}.\\
 \end{figure}
 \newpage
 \section{Prediction application} \label{sec:app}
-My prediction application is finally written in Matlab live script with predefined constants based on Megaplay s.r.o data,
-but for modeling and dynamic prediction are used Live scripts Controls so in the script I am able to easily set all constant to model any situations.
-This mechanism give me options to see other situations.
-By this power I was able to see my model in another situation and will be described in my final summary~\ref{summary}.\\
+Our prediction script is finally written in Matlab Live script with predefined constants based on Megaplay s.r.o data,
+but for modeling and dynamic prediction are used Live scripts Controls so in the script we are able to easily set all constant to model for simulate different situations. We can see model situation in~\ref{appendixc} and taht results is described in the final summary~\ref{summary}.\\
 \subsection{Using random values} \label{subsec:rand}
-In my model are used random generated variables to simulate situation from real store where the user can compare with other store in
-the different situation.
+In our model we use random generated variables to simulate situations from real store where the user can compare with other store in the different situation.
 This other stores and situation should be better or worst to actual store.
 \subsection{Main Matlab code} \label{subsec:matlab}
 \begin{lstlisting}[language=mcode]
