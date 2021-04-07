@@ -284,7 +284,7 @@
 }
 
 % DOCVAR: declaration text
-\newcommand{\@declaration}{I declare that I have prepared the final thesis independently using the above-mentioned professional literature.}
+\newcommand{\@declaration}{I declare that I have prepared the final thesis myself using the above-mentioned professional literature.}
 \newcommand{\declaration}[1]{\renewcommand{\@declaration}{#1}}
 
 % DOCVAR: date (declaration date)
