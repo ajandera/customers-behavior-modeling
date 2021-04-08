@@ -1,25 +1,36 @@
 % !TEX root = ../thesis.tex
 
 \chapter{Summary} \label{summary}
-In our work we focused on creating a mathematical model to predict customer behavior based on previous store data and open data available in online tools.
-As a reference we use regular statistical methods generally used by store owners.
-From reference statistical approaches was achieved the best results from linear regression of $Tr_{t2}=a_0+a_1t+a_2t^2$ which predict store income with aberration about 14.5\%.
+In our work we focused on creating a mathematical models to predict customer behavior based on previous store data and open data available in online tools.
+As a baseline we used linear and polynomial regression which is generally used to predict this kind of data.
+At the first see it's look line that the better reference is polynomial model prediction as you can see in the table with results~\ref{compareresults}, but the trend prediction from the simpliest
+linear regression is very usefully for some approaches.
+In the case that we have only this two models as a primary goal, it will be good idea to test their cooperation and use one to correct another.
+It should have generates very interesting results with trends prediction and income with small aberration too.
+Polynomial prediction has in some months worst result than we expected, this was caused by pandemic situation in the year 2020.
+This situation was absolutly unpredictable.
 However our set goal was to create a better mechanism to predict this important data for each business based on e-commerce solutions.
 To pass our goal we used mechanisms for behavior prediction and mathematical approaches which are usually used in other industries like an autonomous driving,
 telecommunications or idea which looking for correlation between introduce a new products on market with global consumer behavior.
 Mechanisms and approaches we have learned during the work on this thesis give us the ability to create our own vendor, psychology and loyalty models which are the
 base of the final prediction model and help us to finish the goal which we set at the beginning of the work.
-Our main goal was passed by successfully prediction with aberration about 3\% for the 1/2020.
-Our goal was fulfilled in cooperation with the business owner of Megaplay s.r.o to show us the deep of his industry to set constants for our models with a minimal deflection.
-Therefor the next steps should be to clearly define mechanisms to set independent industry constants only on ordinarily accessible data without consultation with business owners.
-Then it will be good to minimize random generate number with a matrix create with real data of store. Estabilished competitors matrix with real data to compare real store and vendor power and customer satisfaction. Unfortunately this open a lots of new problems which have to be solved like a vendor strenth comparation across industries.
-In our original design was prediction for a half of the year 2020, but the pandemic situation which start of the beginning of the year 2020 change the plans,
-so we create prediction only for the first month of the 2020.
+Our main goal was passed by successfully prediction with aberration about 6,6\% for the year 2020.
+The very good results from our model against the other one is paid by more time to prepare data to prediction model.
+If the polynomial model should used more data to be trained on, it returns better results, but this was not a goal of our work.
+Our goal was fulfilled in cooperation with the Megaplay s.r.o to show us the deep of his industry to set constants for our models with a minimal deflection.
+Therefore the next steps should be to clearly define mechanisms to set independent industry constants only on ordinarily accessible data without consultation with business owners.
+Then it will be good to minimize random generate number with a matrix create with real data of store.
+Estabilished competitors matrix with real data to compare real store and vendor power and customer satisfaction.
+Unfortunately this open a lots of new problems which have to be solved like a vendor strength comparation across industries.
 The situation in the industry was change in an unexpected way and modeling that situation was beyond this thesis, but the results of the thesis is enough to show that standard
 simple statistics approaches are not enough for prediction customer behavior in a 21st century, so we have to look on the sophisticated approaches like a mathematical modeling.
 Evolution of computer technology give the power to get more complicated calculation to more users and should be used to get the more relevant data for entrepreneurs to improve their businesses.
-Our prediction is actually combined ourself models inside statistical solution like Hidden Markov model.
+Our prediction is actually combined ourselves models inside statistical solution like Hidden Markov model.
 In the future improves it will be the right way to leave all statics mechanism and as a combination approach use differential equation which should be able to serve predition vector to get results lilke a HMM.
 However when that equation will be found it open the new way of store data prediction from predefined states to dynamically updated states and show the results in realtime to reflect actual visitors and income on each store.
-From different simulation using our script and update constants we get presumed results and for us not surprising results. The number of predicted orders is dependent on numbers of store visitors. Customer satisfaction with the combination with price index is most important value for the prediction and it's corespondent with real behavior, but this is not generally true. It can be aplies to our Central Europe region. However in the future improves will be good to have data from different countries or better continets to check our model in more global way.
-We should expected that the weights ratio will be diferent in other markets, depends on specific customer psyhology behavior in different countries.
+From different simulation using our script and update constants we get presumed results and for us not surprising results.
+The number of predicted orders is dependent on numbers of store visitors.
+Customer satisfaction with the combination with price index is most important value for the prediction and it's corespondent with real behavior, but this is not generally true.
+It can be aplies to our Central Europe region.
+However in the future improves will be good to have data from different countries or better continets to check our model in more global way.
+We should expect that the weights ratio will be different in other markets, depends on specific customer psyhology behavior in different countries.
