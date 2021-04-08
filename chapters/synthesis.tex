@@ -1,19 +1,22 @@
 % !TEX root = ../thesis.tex
 
 \chapter{Syntactic part} \label{sec:methodology}
-Based on the analytical part~\ref{sec:analytical} let us create a mathematical models to predict customer behavior consist of
-vendor, psychology and loyalty sub-models combine in Hidden markov model (HMM) to final prediction model.
-States in the HMM will be read by viterbi algoritm (See section Viterbi~\ref{subsec:viterbi}) which is able to predict the state with the most probability during propagation true HMM.
+Based on the Analytical part~\ref{sec:analytical} let us create a mathematical models to predict customer behavior consist of
+vendor, psychology and loyalty sub-models (Described in own section ~\ref{sec:submodels}) combined in Hidden markov model (HMM) to final prediction model.
+Hidden states in the HMM produced in readable format by viterbi algoritm (See section Viterbi~\ref{subsec:viterbi}) we used for orders calculation for final income prediction.
+Viterbi serve us the state with the most probability during propagation true HMM.
 We lead up to get a better results than actual standard statistical regression methods~\ref{sec:regression} to predict customer behavior in e-commerce.
 In the final our model will return future income for online store based on previous data with better aberration than linear or polynomial regression has.
 For successfully prediction open data for store strength and customer satisfaction and some predefined and computed variables from store will be used.
 \section{Modeling prediction of customer behavior} \label{sec:modeling}
-The goal of model is to predict if customer will successfully finish order or leave store without make an order.
-Then based on that prediction calculate future income for store.
-This model will be consists of three sub-models.
-Vendor model,\ psychology model and loyalty model.
-Then partial results will be combined to complex prediction mechanism, as you can see on figure~\ref{Model schema with interaction}.
-Hidden Markov model in combination with Viterbi algorithm will be used to detect hidden states, which will be reflected predefined weights for specific industries,
+Let us the model to store information about successfully order prediction.
+In the same way the model is able to predict where the customer leaves the store, but this situation was not added to our prediction experiment~\ref{experiment}
+Then based on that prediction data, calculation of future income for store were done.
+Our designed model is consists of three sub-models, which are partially dependent on each other.
+Vendor ,\ psychology and loyalty models we created for our prediction to simulate customer behavior.
+Then partial results was combined to complex prediction mechanism, as you can see on figure~\ref{Model schema with interaction}.
+As a combination method Hidden Markov model was selected as appropriate.
+HMM in combination with Viterbi algorithm will be used to detect hidden states, which will be reflected predefined weights for specific industries,
 to return data matrix with prediction.
 Industry dependent weights was set with Megaplay s.r.o employees, based on their data and experiences.
 \\
@@ -43,7 +46,7 @@ States will be:\\
 With Megaplay s.r.o owner and heureka e-comerce tool calculation data we were set probability wages vector for HMM function like:\\
 $$ p_w = \left(\frac{1}{3} & \frac{1}{2} & \frac{1}{9}\right) $$
 \\
-This vector tells about probabilities for each submodel described in own section~\ref{}
+This vector tells about probabilities for each submodel described in own section~\ref{sec:submodels}
 Vector have to be updated to square matrix which is used in HMM function.\\
 \begin{equation*}
     P_w =
@@ -100,7 +103,7 @@ It's represent the relation between vendor prices and vendor quality.\\
     \begin{center}
         \begin{tabular}{ | l | c |}
             \hline
-            {\textbf{Variable name}} & \textbf{Value}\\
+            {\textbf{Variable name}} & \textbf{Result}\\
             \hline
             average day visitors for a predicted month $U_a$& 2357 \\
             perceived value for psychology model & 0.87 \\
@@ -125,7 +128,7 @@ It's represent the relation between vendor prices and vendor quality.\\
     \begin{center}
         \begin{tabular}{ | l | c |}
             \hline
-            {\textbf{Variable name}} & \textbf{Value equation}\\
+            {\textbf{Variable name}} & \textbf{Equation}\\
             \hline
             number of visitors 1/2020 & $31 * U_a$\\
             average earn per order & $\sum Income / O_c$\\
