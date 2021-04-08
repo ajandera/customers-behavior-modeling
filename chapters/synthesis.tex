@@ -224,13 +224,13 @@ L = \frac{R+Z}{Z}
 As we see on figure~\ref{Loyalty scheme} Loyalty model is consist of all three sub-models (Trust, Customer Satisfaction, Perceived value)
 but commitment model consist of only Trust and Customer Satisfaction.
 a,b,c,d,e .... weight coefficient to combine Trust, Customer satisfaction and Perceived value.\\
-\newpage
-Trust
+\\
+\textbf{Trust}
 \begin{equation} \label{eq:31}
-T = \frac{1}{n} \sum_{i=1}^{n} O_i
+T = \frac{1}{n} \sum_{i=1}^{n} O_i,
 \end{equation}
 \\
-$O_i$ number of orders divide number of visitors per day $i$
+where $O_i$ number of orders divide number of visitors per day $i$.
 \\
 \\
 \textbf{Customer satisfaction} (Se defined values in~\ref{customerSat}) are datasets get from open data per each day, individual satisfaction.
@@ -239,7 +239,7 @@ For simplified the situation we will use average satisfaction per whole store.
 \subsubsection{Commitment and Loyalty} \label{subsubsec:model_loyalty_commitment}
 \textbf{Commitment} is making the actual choice every day or other period basis to keep up with something e.g. a relationship, personal goal, a task, etc.
 We would have to hold ourselves accountable to keep a commitment to something or someone.
-Similarly, being loyal involves holding ourself accountable as well.
+Similarly, being loyal involves holding ourselves accountable as well.
 Against of \textbf{Loyalty} which is usually seen as a character trait rather than a conscious decision.
 This model return probability for customer decision to not leave the store from interval $<0,1>$.\\
 \\
@@ -334,8 +334,10 @@ These two models was trained on income data from years 2018 and 2019.
 In the next step prediction for year 2020 was made. For prediction we use different mechanism for each model.
 The first linear model Matlab's $predint$ function used to get prediction results from previous fitting function.
 The second one used other approach.
-Trained and prepared polynomila model was compared with real data to see the aberrance. Plotting function was used to see the results.
-At a first glance we can se that the results from the models are different. The first linear model with trigonomic function
+Trained and prepared polynomila model was compared with real data to see the aberrance.
+Plotting function was used to see the results, detail on figure~\ref{polypred}.
+At a first glance we can se that the results from the models are different.
+The first linear model with trigonometric function
 is not really god in real income results but very interesting result for trend prediction was produced.
 In contrast with polynomial model which much better in absolut income results, but worst in trend prediction.
 \end{figure}\\
