@@ -1,24 +1,29 @@
-% !TEX root = ../thesis.tex
+% !TEXroot = ../thesis.tex
+%TO DO
+
+%regresion
+
+%As a baseline for our model will be used  linear and polynomial fitting. We will create two models to predict future income.\\
+
+
 
 \chapter{Syntactic part} \label{sec:methodology}
-Based on the Analytical part~\ref{sec:analytical} let us create a mathematical models to predict customer behavior consist of
-vendor, psychology and loyalty sub-models (Described in own section ~\ref{sec:submodels}) combined in Hidden markov model (HMM) to final prediction model.
-Hidden states in the HMM produced in readable format by viterbi algoritm (See section Viterbi~\ref{subsec:viterbi}) we used for orders calculation for final income prediction.
-Viterbi serve us the state with the most probability during propagation true HMM.
-We lead up to get a better results than actual standard statistical regression methods~\ref{sec:regression} to predict customer behavior in e-commerce.
-In the final our model will return future income for online store based on previous data with better aberration than linear or polynomial regression has.
-For successfully prediction open data for store strength and customer satisfaction and some predefined and computed variables from store will be used.
-\section{Modeling prediction of customer behavior} \label{sec:modeling}
-Let us the model to store information about successfully order prediction.
-In the same way the model is able to predict where the customer leaves the store, but this situation was not added to our prediction experiment~\ref{experiment}
+Based on the Analytical part~\ref{sec:analytical} let us create  mathematical models to predict customer behavior which consist of
+vendor, psychology and loyalty sub-models (see section~\ref {sec:submodels}) combined in Hidden markov model (HMM) to final prediction model.
+We lead to get better results than predicting standard statistical methods of regression~\ref{sec:regression} to predict customer behavior in e-commerce.
+Finally our model will return future income for online store based on previous data with better aberration than linear or polynomial regression has.
+For successfully prediction will be used open data for store strength and customer satisfaction and some predefined and computed variables from store.
+\section {Modeling prediction of customer behavior} \label{sec:modeling}
+Let us model to store information about successfully order prediction.
+In the same way the model is able to predict where the customer leaves the store, but this situation was not added to our prediction experiment.
 Then based on that prediction data, calculation of future income for store were done.
-Our designed model is consists of three sub-models, which are partially dependent on each other.
-Vendor ,\ psychology and loyalty models we created for our prediction to simulate customer behavior.
-Then partial results was combined to complex prediction mechanism, as you can see on figure~\ref{Model schema with interaction}.
-As a combination method Hidden Markov model was selected as appropriate.
-HMM in combination with Viterbi algorithm will be used to detect hidden states, which will be reflected predefined weights for specific industries,
-to return data matrix with prediction.
-Industry dependent weights was set with Megaplay s.r.o employees, based on their data and experiences.
+Our designed model consists of three sub-models, which are partially dependent on each other.
+Vendor,\ psychology and loyalty models we created for our prediction to simulate customer behavior.
+Then partial results was combined into complex prediction mechanism, as you can see on figure~\ref{Model schema with interaction}.
+Appropriataly as a combination method was selected Hidden Markov Chain.
+HMM in combination with Viterbi algorithm will be used to detect hidden states, which will be reflected in predefined weights for specific
+industries to return data matrix with prediction.
+Industry dependent on weights was set with Megaplay s.r.o employees, based on their data and experiences.
 \\
 \begin{figure}[h!]
     \begin{center}
@@ -43,7 +48,7 @@ States will be:\\
     \item not finished order
     \item no order decision
 \end{itemize}
-With Megaplay s.r.o owner and heureka e-comerce tool calculation data we were set probability wages vector for HMM function like:\\
+With Megaplay s.r.o owner and heureka e-comerce tool calculation data we have set probability wages vector for HMM function like:\\
 $$ p_w = \left(\frac{1}{3} & \frac{1}{2} & \frac{1}{9}\right) $$
 \\
 This vector tells about probabilities for each submodel described in own section~\ref{sec:submodels}
@@ -64,7 +69,7 @@ the people whom the data describe remain anonymous.} and pseudonymized \footnote
 and de-identification procedure by which personally identifiable information fields within a data record are replaced
 by one or more artificial identifiers, or pseudonyms.} to keep legal notice of~\cite{gdpr}.
 Then we should utilize data to utilized inputs.
-This prepared data I will add to the Matlab live script file to be used for prediction.\\
+This prepared data we will add to the Matlab live script file which will be use for prediction.\\
 \\
 \textbf{Average day visitors for a predicted month}\\
 This value was calculated from anonymize user data from Google Analytics tool used their prediction mechanism to get number of future users based on previous a number of visitors.\\
@@ -73,7 +78,7 @@ This value was calculated from anonymize user data from Google Analytics tool us
 This variable is needed for loyalty model~\ref{subsec:model_loyalty} and comes from an open e-commerce compare data provided by Heureka.cz/Heureka.sk internal tool.\\
 \\
 \textbf{Number of orders 2018 - 2019}\\
-Number of orders get from shopycrm.com tool used in Megaplay s.r.o to manage their business processes and store all needed data.\\
+Number of orders we get from shopycrm.com tool used in Megaplay s.r.o to manage their business processes and also store all needed data.\\
 \\
 \textbf{Unique products sell}\\
 This variable is used in Psychology model~\ref{subsec:model_psychology} for Price aspect calculation~\ref{eq:26}.\\
@@ -87,17 +92,17 @@ This measurement gives you a context for the retail margin.
 For example, if you have a 5~€ retail margin on two different products, but one costs 150~€ and next one costs 10~€, the second product would have a much higher retail margin percentage.\\
 \\
 \textbf{Number of product order each day $Q_i$}\\
-This is a calculated value from shopycrm.com about number of product order for each one.
+This is a calculated value from shopycrm.com about the number of product order for each one.
 It's used in Psychology model~\ref{subsec:model_psychology}. \\
 \\
 \textbf{Quality index $Q_1$}\\
 This is vendor quality index provided by Heureka open data.
 This is a power/strength of the store.
-Higher number mean that for a customer is more difficult to leave the store and go to another online store.\\
+Higher number means that for a customer is more difficult to leave the store and go to another online store.\\
 \\
 \textbf{Vendor coefficients $\beta, \gamma, \delta$} \label{vendorCoeff}\\
 This three coefficients are used as weight for vendor model~\ref{subsec:model_vendors} and was set with cooperation with Megaplay s.r.o owner for their industry.
-It's represent the relation between vendor prices and vendor quality.\\
+It represents the relation between vendor prices and vendor quality.\\
 \\
 \begin{table}[h!]
     \begin{center}
@@ -144,14 +149,14 @@ It's represent the relation between vendor prices and vendor quality.\\
 \\
 \section{Submodels for Customer behavior model} \label{sec:submodels}
 \subsection{Vendors} \label{subsec:model_vendors}
-For simplification, we will take to account only a two vendors market share, without 100\% domination, because of on a real
-market is 100\% monopole unlikely see and then we will be reflected only main competitor.
-From that condition it is evident that for market dominate vendor it will return false positive results.
-Our model is based on equations from Brands section~\ref{eq:10} and from those equations we will get probability of vendor change from
-vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$ it will break the computation and customer
-will leave our store without successfully completing buy process.
-Results of this computation wil be probability for each iteration of buy process simulation in an interval $<0,1>$.
-Data for this model will comes from open data provided by google.com, heureka.cz/heureka.sk and national governments.
+For simplification, we will take to account only a two vendors market share, without 100\% domination, because on a real
+market is 100\% monopole unlikely to see and then we will be reflected only main competitor.
+From that condition it is evident that for market to which dominate vendor it will return false positive results.
+Our model is based on equations from Brands section~\ref{eq:10} and from those equations we will get probability of vendor
+change from vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$ it will disrupt the
+computation and customer will leave our store without completing buying process successfully.
+Results of this computation wil be probability for each iteration of buying process simulation in an interval $<0,1>$.
+Data for this model will come from open data provided by google.com, heureka.cz/heureka.sk and national governments.
 That data will be combined with calculated price indexes downloaded from shopycrm.com tool.
 \\
 \begin{equation} \label{eq:24}
@@ -192,7 +197,7 @@ In this model we will simplify only for price effect~\ref{subsubsec:model_psycho
 Coefficient C is used to be $\alpha_{ij}$ always positive.
 \subsubsection{Center of mass aspect} \label{subsubsec:model_psychology_mass}
 Center of mass aspect is applied as a part of sociology to our psyhology model.
-Marketers use it to manipulate with customers in global way.
+Marketers use it for manipulating with customers in global way.
 Like a black friday, Cyber monday etc., in that days stores manipulate with our psychology by discount prices.
 \\
 \begin{equation} \label{eq:28}
@@ -221,7 +226,7 @@ L = \frac{R+Z}{Z}
     \item Z ..... probability of commitment model
 \end{enumerate}
 \\
-As we see on figure~\ref{Loyalty scheme} Loyalty model is consist of all three sub-models (Trust, Customer Satisfaction, Perceived value)
+As we see on figure~\ref{Loyalty scheme} Loyalty model consists of all three sub-models (Trust, Customer Satisfaction, Perceived value)
 but commitment model consist of only Trust and Customer Satisfaction.
 a,b,c,d,e .... weight coefficient to combine Trust, Customer satisfaction and Perceived value.\\
 \\
@@ -261,19 +266,19 @@ who was the first to describe the forward-backward procedure.}
 These probabilities will be combined with specific weights coefficients to always prevent positives results.
 \\
 \section{Experiment} \label{experiment}
-Let us prepare experiment to test our models. We were prepared three models.
+Let us prepare experiment to test our models. We prepared three models.
 Linear regresion for model:\\
 \begin{equation} \label{eq:40}
-f(x) = a(\sin(x-\pi))+b((x-10)^2)+c*(1),
+f(x) = a(\sin(x-\pi))+b((x-10)^2)+c,
 \end{equation}\\
 with coefficients $a =2.978.10^5,b =1687,c = 1.753.10^6$, polynomial regression for model:\\
 \begin{equation} \label{eq:41}
-f(x) = p1*x^4 + p2*x^3 + p3*x^2 + p4*x + p5,
+f(x) = p_1x^4 + p_2x^3 + p_3x^2 + p_4x + p_5,
 \end{equation}\\
-with these coefficients: $p1 = 225.1, p2 = -1.059.10^4, p3 =1.596.10^5,\\
-p4 = -8.205.10^5, p5 = 2.702.10^6$ and our Customer behavior model, described in figure~\ref{Model schema with interaction}.
-These model get us prediction for year 2020.
-Prediction period we compared and calculate aberration for each one against real store income from 2020.
+with these coefficients: $p_1 = 225.1, p_2 = -1.059.10^4, p_3 =1.596.10^5,\\
+p_4 = -8.205.10^5, p_5 = 2.702.10^6$ and our Customer behavior model, described in figure~\ref{Model schema with interaction}.
+These models get us prediction for year 2020.
+We compared prediction period  and  for each we calculate aberration against real store income from 2020.
 Experiment was simulated in Matlab, where internal predefined function was used. See more in section~\ref{subsec:libraries}.
 Let see our results in Evaluation section~\ref{evaluation} and Summary section~\ref{summary}.\\
 \subsection{Used software, libraries and predefined functions} \label{subsec:libraries}
@@ -295,8 +300,8 @@ Use live scripts and functions to:\\
 \textbf{Matlab Curve Fitting Tool}\\
 The Curve Fitting Toolbox provides a collection of GUIs and M-files.
 With the toolbox we are able to data preprocessing such as sectioning and smoothing, parametric and nonparametric data fitting,
-fit statistics to assist you in determining the goodness of fit,analysis capabilities such as extrapolation, differentiation, and integration
-A graphical environment that allows you to explore and analyze data sets and fits visually and numerically.\\
+and also fit statistics which assist us in determining the goodness of fit,analysis capabilities such as extrapolation, differentiation, and integration.
+A graphical environment allows you to explore and analyze data sets and fits visually and numerically.\\
 \textbf{hhmgenerate}~\cite{hhmgenerate}\\
 The function $hmmgenerate$ begins with the model in state 1 at step 0, prior to the first emission.
 The model then makes a transition to state $i_1$, with probability $T_{1i_1}$, and generates an emission $a_k_1$ with probability $E_{i_1k_11}$.
@@ -331,16 +336,17 @@ These two models was trained on income data from years 2018 and 2019.
     \end{center}
     \caption{Fitting the data with cftool~\cite{luarn}}
     \label{cftool}
-In the next step prediction for year 2020 was made. For prediction we use different mechanism for each model.
+\end{figure}\\
+In the next step was made a prediction for year 2020.
+For the prediction we use different mechanism for each model.
 The first linear model Matlab's $predint$ function used to get prediction results from previous fitting function.
 The second one used other approach.
-Trained and prepared polynomila model was compared with real data to see the aberrance.
-Plotting function was used to see the results, detail on figure~\ref{polypred}.
-At a first glance we can se that the results from the models are different.
-The first linear model with trigonometric function
-is not really god in real income results but very interesting result for trend prediction was produced.
-In contrast with polynomial model which much better in absolut income results, but worst in trend prediction.
-\end{figure}\\
+Trained and prepared polynomial model was compared with real data to see the aberrance.
+Plotting function was used to see the results, see on figure~\ref{polypred}.
+At a first glance we can see that the results from the models are different.
+The first linear model with trigonomic function
+is not satisfying in real income results but on the other hand was produced a very interesting result for trend prediction.
+In contrast with polynomial model which has much better results in absolut income results, but much worse in trend prediction.\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=80mm]{predict.png}
@@ -352,7 +358,7 @@ In contrast with polynomial model which much better in absolut income results, b
 Our prediction script is finally written in Matlab Live script with predefined constants based on Megaplay s.r.o data,
 but for modeling and dynamic prediction are used Live scripts Controls so in the script we are able to easily set all constant to model for simulate different situations.
 Let see the function of our prepared model.
-In the first step model get predefined data from inicial part (See more in sectin~\ref{subsec:preprocessing}).
+In the first step model got predefined data from initial part (See more in sectin~\ref{subsec:preprocessing}).
 This precalculated data entered calculation loop.
 Next loop read the value of predefined number of customers in each period and simulated the virtual customer bavior in order process in the next steps:
 \begin{enumerate}
@@ -364,17 +370,17 @@ Next loop read the value of predefined number of customers in each period and si
     \item check result matrix produced by viterbi and save the number of success orders
     \item calculate prediction income
 \end{enumerate}\\
-Whole prediction is made 10 times and the final result is arithmetic mean from this ten times run to random deviation be removed.
+Whole prediction is made 10 times. The final result is arithmetic mean from this prediction which is ten times run to random deviation until is removed.
 We can see model situation in~\ref{apendixc} and that results is described in the final summary~\ref{summary} as results from previous models from section~\ref{sec:baseline}.
 \subsection{Using random values} \label{subsec:rand}
-In our model random generated variables was used to simulate situations from real store where the user can compare with other store in the different situation.
-This other stores and situation should be better or worst to actual store.
-To improve results should be better that real competitors' data from each store was used, but is not simple to get them.
+In our model was randomly generated variables which was used to simulate situations from real store where the user can compare one store to another one in the different situation.
+In other stores the situation should be better or worst to actual store.
+To improve the results, it should be better to use data from real competitors from each trade, but it is not easy to obtain them.
 This random variables are used as a simplification of that situation.
 \subsection{Compare results} \label{subsec:matlab}
-Lets us defined the method to compare our models results.
-Absolute number of income value prediction is not to represent and important for the store owners, so we were calculated
-the aberration for each month prediction and then easily calculate quarterly and yearly results.
+Finally we define the method to compare our models results.
+Absolute number of income value prediction should not be important for the store owners because of that we calculated the aberration for each month
+prediction and then we easily calculate quarterly and yearly results.
 \begin{equation} \label{eq:42}
 A = ((R - P)/P) * 100,
 \end{equation}\\

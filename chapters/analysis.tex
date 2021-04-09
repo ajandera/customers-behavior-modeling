@@ -2,7 +2,7 @@
 
 \chapter{Analytical part} \label{sec:analytical}
 
-\section{Introduction to the issue} \label{sec:description}
+\section{Introduction} \label{sec:description}
 Each e-commerce project solves how to predict behavior of their consumers or visitors.
 In that complex prediction is usually used statistical methods like a moving average and linear regression in order to
 get an idea of consumers behavior.
@@ -40,7 +40,7 @@ Proprietary locking is for example blocking mobile phones for only one of the op
 \section{Mathematical background and models} \label{sec:introduction}
 Overview of mathematical equations and approaches used to our prediction in context of Marketing approaches usually used to predict consumer behavior.\\
 \\
-\textbf{Simple Dynamic Models} \label{subsec:simpleDynamicModels}\\
+\subsection{Simple Dynamic Models} \label{subsec:simpleDynamicModels}\\
 One of the simplest models that have been considered for human behavior modeling are dynamic single prices~\cite{pantland}:
 
 \begin{equation} \label{eq:1}
@@ -58,7 +58,7 @@ where the sensor observation $Y$ is a function of $h$ of the state vector and ti
 \\
 Subsequently, using Kalman results we are able to find the optimal linear estimate as you can see in equation~\ref{eq:3}.\\
 \\
-\textbf{Multiple Dynamic Models} \label{subsec:multipleDynamicModels}\\
+\subsection{Multiple Dynamic Models} \label{subsec:multipleDynamicModels}\\
 The consumer behavior is usually not as simple as a single dynamic model.
 For complex model of human behavior we can use some alternatives.
 In many cases we have to use different models for each dynamic response of person~\cite{wilsky}.
@@ -68,7 +68,7 @@ In these situations is Kalman’s filter calculation very useful for realtime ap
 This approach devide the person’s overall behavior down into several prototypical behaviors~\cite{pantland}.
 Mathematically, this is accomplished by setting up a set of states $S$, each associated with a Kalman’s filter and a particular dynamic model.\\
 \\
-\textbf{A linear ODE model} \label{subsec:ode}\\
+\subsection{A linear ODE model} \label{subsec:ode}\\
 In this model the strength of flux between brands and products are determined by perceived brand quality, based upon binary
 The simplest response to such comparisons is an attempt by customers to minimize the expected regret resulting from any choice, which is assumed here.
 It has been previously shown that the choice rule recognizes the attribute-wise proximity of an alternative to other brands.
@@ -78,13 +78,11 @@ Thus customers attempt to minimize their anticipated regret by opting on any par
 More sophisticated customer behavior, capable of not only ranking brands but discriminating according to the size of proximity gap requires more complex modelling.
 However, this may be justified because, at the very least, subjective attribute valuations appear to be non-linear reference point dependent functions.
 The ith measurement of innovations process is, intuitively, the part of the observation data that is unexplained by the ith model.
-The model that explains the largest portion of the observations is, of course, the model most likely to be correct .\\
+The model that explains the largest portion of the observations is, of course, the model most likely to be correct.
+Example of simle linear ODE model:\\
+$$X(t) = \frac{dX}{dt}$$
 \\
-\\
-\\
-\\
-\\
-\textbf{Discrete-time model} \label{subsec:discrete}\\
+\subsection{Discrete-time model} \label{subsec:discrete}\\
 Discrete models or difference equations \footnote{Difference equations can be viewed either as a discrete analogue of differential equations, or independently.
 They are used for approximation of differential operators, for solving mathematical problems with recurrences, for building various discrete
 models, etc.} are used to describe biological events or whole systems for which is natural to regret time at fixed discrete intervals~\cite{pantland}:
@@ -101,7 +99,66 @@ The measurement innovations process for the $i$th model.\\
 The $i$th measurement innovations process is, intuitively, the part of the observation data that is unexplained by the $i$th model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.\\
 
-\subsection{Modeling and Prediction of Human Behavior} \label{subsec:prediction}
+\subsection{Regression models} \label{sec:regression}
+A regression model is used to investigate the relationship between two or more variables and estimate one variable based on the others.
+In regression analysis, variables can be independent, which are used as the predictor or causal input and dependent, which are used as response variables.
+
+
+\subsubsection{Linear regression} \label{sec:linear}
+As it saw at Linear regression~\cite{linear} linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data.
+One variable is considered to be an explanatory variable, and the other is considered to be a dependent variable.
+For example, we want to relate the weights of individuals to their heights using a linear regression model.
+Before attempting to fit a linear model to observed data, we should first determine if exist a relationship between the variables of interest.
+This does not necessarily mean that one variable causes the other, but that there is some significant association between them.
+To determine the strength of relationship a scatterplot can be a helpful tool.
+If there appears to be no association between the proposed explanatory and dependent variables, then fitting a linear regression
+model to the data probably will not provide a useful model.
+A valuable numerical measure of association between two variables is the correlation coefficient.
+That is a value from $<-1, 1>$ range indicates the strength of the association of the observed data for the two variables.\\
+A linear regression line has an equation of the form $Y = a + bX$, where $X$ is the explanatory variable and $Y$ is the dependent variable.
+The slope of the line is $b$, and $a$ is the intercept.
+Example of some basic linear models:\\
+\begin{equation} \label{eq:lin}
+\begin{array}{l@{}l}
+	Y = ax + b\\
+	Y = a + bx + c\\
+	Y = a\sin x + b\\
+\end{array}
+\end{equation}
+
+\subsubsection{Polynomial regression} \label{sec:poly}
+Polynomial models are a great tool for determining which input factors drive responses and in what direction~\cite{poly}.
+These are also the most common models used for analysis of designed experiments.
+A quadratic (second-order) polynomial model for two explanatory variables has the form of the equation below.
+The polynomial models can be used in those situations where the relationship between study and explanatory variables is curvilinear.
+Sometimes a nonlinear relationship in a small range of explanatory variable can also be modelled by polynomials.
+The order of the polynomial model is kept as low as possible.
+Some transformations can be used for remaining the model to be the first order.
+If this is not satisfactory, then the second-order polynomial is tried.
+A good strategy should be used to choose the order of an approximate polynomial.
+One possible approach is to successively fit the models in increasing order and test the significance of regression coefficients at each step of model fitting.
+Another approach is to fit the appropriate highest order model and then delete terms one at a time starting with the highest order.
+This continues until the highest order remaining term has a significant statistic.
+This is called a backward elimination procedure.
+The forward selection and backward elimination procedures do not necessarily lead to the same model.
+The first and second-order polynomials are mostly used in practice.
+Keep the order increasing until test for the highest order term is nonsignificant.
+This is called a forward selection procedure.
+Arbitrary fitting of higher-order polynomials can be a serious abuse of regression analysis.
+A model which is consistent with the knowledge of data and its environment should be taken into account.
+It is always possible for a polynomial of order to pass through n points so that a polynomial of sufficiently high degree can always be found that provides a good fit to the data.
+Such models neither enhance the understanding of the unknown function nor be a good predictor.
+Example of some basic polynomial models from degree 2 to degree 4:\\
+\begin{equation} \label{eq:poly}
+\begin{array}{l@{}l}
+	Y = ax^2 + b\\
+	Y = ax^2 + bx + c\\
+	Y = ax^3 + bx^2 + cx + d\\
+	Y = ax^4 + bx^3 + cx^2 + dx + e\\
+\end{array}
+\end{equation}
+
+\section{Modeling and Prediction of Human Behavior} \label{sec:prediction}
 Based on equation~\ref{eq:3},\ we can continue to find optimal linear estimate $X_k$ using the Kalman's filter~\cite{pantland}: \footnote{In statistics
 and control theory, Kalman filtering, also known as linear quadratic estimation (LQE), is an algorithm that
 uses a series of measurements observed over time, containing statistical noise and other inaccuracies, and produces
@@ -127,7 +184,7 @@ These functions are commonly extended to "well-behaved" nonlinear problems by ap
 the nonlinear system by linear functions using a local Taylor expansion\footnote{Taylor series is a representation of a function
 as an infinite sum of terms that are calculated from the values of the function's derivatives at a single point.}.
 
-\subsection{Specification in customer behavior} \label{subsec:specification}
+\subsection{Specification of customer behavior} \label{subsec:specification}
 Products for customers such as shampoo or tomato sauce are designed to appeal to customers and encouraging them to buy those products.
 It depends on the industry section but all of that designs try to focus on customer’s subconscious.
 However, buying behavior is not only a function of the product.
@@ -217,9 +274,9 @@ influences (point 1 and 2), especially if the advertising takes the form of a we
 More specifically, the following four properties have been identified by Unilever Research~\cite{patel} as being important and their influence were included in one or more models:
 
 \begin{enumerate}
-	\item Minimise anticipated regret.
-	This refers just two products compare with each other as regards different qualities, which can include price (or $affordability = 1/price$).
-	A customer might judge one item to be superior to another in all respects. The first option is a safe choice for the customer then.
+	\item Regret.
+	This refers just two products compare with each other as regards different qualities, which can include price (or its inverse value).
+	A customer might judge one item to be superior to another in all respects.
 	\item Attribute change.
 	The introduction of a new product onto the market can change the way of customers, or at least some of them, view established brands.
 	This might be by drawing attention to some quality which was not previously much regarded, or it might make people give different
@@ -234,77 +291,16 @@ More specifically, the following four properties have been identified by Unileve
 	They can be compared according to price, size etc\. and a decision made. With three or more,
 	comparisons might be made between two things at a time, one could be eliminated and then the winner contrasted with a third.
 \end{enumerate}
-
-\subsection{Networks} \label{sec:networks}
-Markov chain propagation should be imagine as decision tree with a predefined states and probabilities from one state to another.
-To see how such a model gives rise to the probabilities of choosing each state we need to construct a decision tree.
-In forming the decision tree we have to decide which states the consumer will choose to compare.
-This process should be done eg. in Hidden markov chain. There is an equal probability of choosing each pair .
-We also have to decide how many comparisons the consumer will make, that is, having chosen a final state.\\
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=80mm]{level1DT.png}
-	\end{center}
-	\caption{Schema of decision tree function~\cite{patel}}
-	\label{DT1}
-\end{figure}\\
-The simplest decision tree for the three states shown in Figure~\ref{DT1}, with one level of comparison (that is, the consumer stops
-after comparing just two states eg. continue order or leave the store) For better explanation let us assume that product 1 and 2 are equally attractive
-to the consumer, so that in the absence of product 3 and each would have a probability of selection of 1/2.
-Then we can see what the introduction of product 3 will do to this balance of probabilities, and in particular whether there is a decoy effect (See section~\ref{subsec:decoy}),
-that means product 1 dominates product 3, the introduction of product 3 might mean that more people will choose to buy product 1
-(since product 1 will win in any comparison between the two).
-In this scenario product 3 acts as a decoy, channelling consumers to product 1. Let us assume that the probability of choosing product 3 over product 2 in a comparison is $p$.
-The probability of reaching any leaf in the decision tree is simply the product of the probabilities of taking each branch required to get there.
-Thus, after introducing product 3 the probabilities of choosing each product are~\cite{patel}:\\
-\begin{equation} \label{eq:12}
-\begin{array}{l@{}l}
-	p_1 = \frac{1}{3}*\frac{1}{2}+\frac{1}{3}*1 = \frac{1}{2} \\
-	p_2 = \frac{1}{3}*\frac{1}{2}+\frac{1}{3}*(1-p) = \frac{1}{2} - \frac{p}{3} \\
-	p_3 = \frac{1}{3}*0+\frac{1}{3}*p = \frac{p}{3},
-\end{array}
-\end{equation}\\
-where $p_1,p_2,p_3$ are probabilities for each state and $p$ is the probability of choose product 3 over product 2.\\
-\\
 \subsection{Viterbi algorithm} \label{subsec:viterbi}
 The Viterbi algorithm is a dynamic programming algorithm for finding the most likely sequence of hidden states called
 the Viterbi path that results in a sequence of observed events, especially in the context of Markov information
-sources and hidden Markov models (HMM) as it seen on figure~\ref{viterbi-schema}.
-\begin{figure}[h!]
-	\begin{center}
-		\includegraphics[width=80mm]{viterbi_graph.png}
-	\end{center}
-	\caption{Viterbi algorithm schema example~\cite{viterbi}}
-	\label{viterbi-schema}
-\end{figure}\\
+sources and hidden Markov models (HMM).\\
 The algorithm has found universal application in decoding the convolutional codes used in both CDMA and GSM digital cellular,
 dial-up modems, satellite, deep-space communications, and 802.11 wireless LANs.
 Now it is also commonly used in speech recognition, speech synthesis, keyword spotting, computational linguistics, and bioinformatics.
 For example, in speech-to-text (speech recogni- tion), the acoustic signal is treated as the observed sequence of events, and a string of text is considered
-to be the "hidden cause" of the acoustic signal. The Viterbi algorithm finds the most likely string of text given the acoustic signal.\\
-Here you can see Viterbi algoritm implementation in Python language ~\cite{DBLP:journals/corr/abs-cs-0504020}: \\
-\begin{python}
-# probability == p. Tm: the transition matrix. Em: the emission matrix.
-function viterbi(O, S, Π, Tm, Em): best_path
-  # To hold p. of each state given each observation.
-  trellis ← matrix(length(S), length(O))
-  # Determine each hidden state's p. at time 0…
-  for s in range(length(S)):
-    trellis[s, 0] ← Π[s] * Em[s, O[0]]
-  # and afterwards, assuming each state's most likely prior state, k.
-  for o in range(1, length(O)):
-    for s in range(length(S)):
-      k ← argmax(k in trellis[k, o-1] * Tm[k, s] * Em[s, o])
-      trellis[s, o] ← trellis[k, o-1] * Tm[k, s] * Em[s, o]
-  best_path ← list()
-  # Backtrack from last observation.
-  for o in range(-1, -(length(O)+1), -1):
-    # Most likely state at o
-    k ← argmax(k in trellis[k, o])
-    # is noted for return.
-    best_path.insert(0, S[k])
-  return best_path
-\end{python}\\
+to be the "hidden cause" of the acoustic signal.
+The Viterbi algorithm finds the most likely string of text given the acoustic signal~\cite{DBLP:journals/corr/abs-cs-0504020}. \\
 
 \subsection{Predicted effects} \label{subsec:predicted}
 \begin{enumerate}
@@ -324,17 +320,14 @@ function viterbi(O, S, Π, Tm, Em): best_path
 	This question is complementary to that of the decoy, asking what market share a new product will gain rather than how it will affect the market shares of existing products.
 
 	\item A choice overload: when there are too many possible options for potential customers from which they can pick,
-	many of them will search the sites without making a purchase.
+	many of them will search the sites without making a
+	\item Minimise anticipated regret modelling property was taken to lead to simple comparisons along the lines of with regard to quality $k$,
+	is product $i$ better than product $j$?
+	If the answer to all relevant questions, $k = 1, . . . , nq$, if $nq$ is the number of qualities, is no, then a customer
+	will not change from $j$ to $i$.
+	The more times the answer is yes, the faster such a change is likely to happen.
 \end{enumerate}
-
-\subsection{Minimise anticipated regret} \label{subsec:regret}
-This modelling property was taken to lead to simple comparisons along the lines of with regard to quality $k$,
-is product $i$ better than product $j$?
-If the answer to all relevant questions, $k = 1, . . . , nq$, if $nq$ is the number of qualities, is no, then a customer
-will not change from $j$ to $i$.
-The more times the answer is yes, the faster such a change is likely to happen.
-This can be represented by taking the flow-rate constants to be of the form (todo equation)
-
+\\
 \section{Customer preferences and decision process} \label{sec:customer_preferences}
 Considering a customer whose preference is shared out amongst all the available brands in a market where there are no empty or zero brands,
 so that the total of all brands preference shares is 1 (100\%).
@@ -345,8 +338,7 @@ Of interest is the case when a third brand is added, possibly as a
 The additional brand means that the preference distribution changes from being a straight line in the two-dimensional plane $(A, B)$,
 to a plane in three-dimensional space $(A, B, C)$.\\
 \\
-\textbf{Customer decision process} \label{sec:cus_decision}\\
-Described in~\cite{patel} show that the standard Logit model~\ref{subsec:logit} for customer choice assumes that
+\textbf{Customer decision process} \label{sec:cus_decision} described in~\cite{patel} show that the standard Logit model~\ref{subsec:logit} for customer choice assumes that
 the probability, $p_i$, with which a customer buys a given product $i$ from a range of products $<1, n>$ depends on
 the value which customer internally assigned to that product and his price.
 This dependence is taken to be of exponential form.
@@ -402,19 +394,19 @@ Flux is the proportion of customer preference to switch to other brand or produc
 		\includegraphics[width=80mm]{affordability.png}
 	\end{center}
 	\caption{Products in the affordability-value plane.
-	The shaded region is the region of products dominated by product 1.}
-	\label{Affordability of products~\cite{pantland}}
+	The shaded region is the region of products dominated by product 1~\cite{pantland}.}
+	\label{Affordability of products}
 \end{figure}
 \\
-\section{A particle-dynamics model} \label{sec:dynamic}
 The basic idea from Models of Consumer Behaviour~\cite{patel} is to build a model based on a physical analogy,
-between the customers buying behavior and particle-particle dynamics. Let us assume customers to be particles moving in quality space.
+between the customers buying behavior and particle-particle dynamics.
+Let us assume customers to be particles moving in quality space.\\
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=80mm]{strength.png}
 	\end{center}
-	\caption{Product space with two products}
-	\label{Strength of products~\cite{patel}}
+	\caption{Product space with two products~\cite{patel}}
+	\label{Strength of products}
 \end{figure}
 \\
 The products are considered as sources of  potentials strength, the details of the potentials depending on the products’ characteristics.
@@ -422,7 +414,7 @@ The psychology of people will be regarded as the influence of the potential on t
 This will depend on the customer but also on the characteristics of each product, weighted by coefficients of choice.
 The sociology of individuals can be considered as a form of particle-particle interaction. Following what has gone before,
 the product space is defined by just two characteristics for each product $i$ with affordability $P_i$ and quality $Q_i$.
-We can define the ‘strength’\footnote{ thw power if the product or service to be attractive for customer} of a product as
+We can define the ‘strength’\footnote{The power if the product or service to be attractive for customer.} of a product as
 the distance of the product from the origin in product space as~\cite{pantland}:
 \\
 \begin{equation} \label{eq:10}
@@ -430,51 +422,3 @@ U_i = \frac{(P_i + Q_i)}{2}.
 \end{equation}
 \\
 All the products with $P_i + Q_i = constant$ will have the same strength.
-
-\subsection{Dynamics of market share} \label{subsec:marketshare}
-Market shares don't unusually depend on their qualitative behavior, on the coefficients $\alpha_{ij}$ and the values
-of $\alpha_{ij}$ grow up as fast as their tend towards stability values.
-In the situation  that $\alpha_{ij} \geq 0$ and $\alpha_{ij} + \alpha_{ji} > 0$ for $i \neq j$ the linear system looks like~\cite{patel}:
-\\
-\begin{equation} \label{eq:17}
-\frac{dX_i}{dt} = \sum_ja_{ij}X_j,
-\end{equation}
-\\
-where $a_{ij} = \alpha_{ij}$ for $i \neq j$ and $a_{ii} - \sum_{i \neq j}\alpha_{ji}$ turns out to have semi-definite
-coefficient matrix.
-
-\section{Regression} \label{sec:regression}
-As a baseline for our model will be used  linear and polynomial fitting. We will create two models to predict future income.\\
-\subsection{Linear regression} \label{sec:linear}
-As it saw at Linear regression~\cite{linear} linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data.
-One variable is considered to be an explanatory variable, and the other is considered to be a dependent variable.
-For example, we want to relate the weights of individuals to their heights using a linear regression model.
-Before attempting to fit a linear model to observed data, we should first determine if exist a relationship between the variables of interest.
-This does not necessarily mean that one variable causes the other, but that there is some significant association between them.
-To determine the strength of relationship a scatterplot can be a helpful tool.
-If there appears to be no association between the proposed explanatory and dependent variables, then fitting a linear regression
-model to the data probably will not provide a useful model.
-A valuable numerical measure of association between two variables is the correlation coefficient.
-That is a value from $<-1, 1>$ range indicates the strength of the association of the observed data for the two variables.\\
-A linear regression line has an equation of the form $Y = a + bX$, where $X$ is the explanatory variable and $Y$ is the dependent variable.
-The slope of the line is $b$, and $a$ is the intercept.
-
-\subsection{Polynomial regression} \label{sec:poly}
-Polynomial models are a great tool for determining which input factors drive responses and in what direction~\cite{poly}.
-These are also the most common models used for analysis of designed experiments.
-A quadratic (second-order) polynomial model for two explanatory variables has the form of the equation below.
-The polynomial models can be used in those situations where the relationship between study and explanatory variables is curvilinear.
-Sometimes a nonlinear relationship in a small range of explanatory variable can also be modelled by polynomials.
-The order of the polynomial model is kept as low as possible. Some transformations can be used for remaining the model to be the first order.
-If this is not satisfactory, then the second-order polynomial is tried.
-A good strategy should be used to choose the order of an approximate polynomial.
-One possible approach is to successively fit the models in increasing order and test the significance of regression coefficients at each step of model fitting.
-Another approach is to fit the appropriate highest order model and then delete terms one at a time starting with the highest order.
-This continues until the highest order remaining term has a significant statistic.
-This is called a backward elimination procedure. The forward selection and backward elimination procedures do not necessarily lead to the same model.
-The first and second-order polynomials are mostly used in practice.
-Keep the order increasing until test for the highest order term is nonsignificant.
-This is called a forward selection procedure. Arbitrary fitting of higher-order polynomials can be a serious abuse of regression analysis.
-A model which is consistent with the knowledge of data and its environment should be taken into account.
-It is always possible for a polynomial of order to pass through n points so that a polynomial of sufficiently high degree can always be found that provides a good fit to the data.
-Such models neither enhance the understanding of the unknown function nor be a good predictor.
