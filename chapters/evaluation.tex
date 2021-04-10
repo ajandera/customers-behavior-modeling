@@ -1,34 +1,6 @@
 % !TEX root = ../thesis.tex
 \chapter{Evaluation} \label{evaluation}
-Whole prediction is made 10 times. The final result is arithmetic mean from this prediction which is ten times run to random deviation until is removed.
-Our prediction script is finally written in Matlab Live script with predefined constants based on Megaplay s.r.o data,
-    but for modeling and dynamic prediction are used Live scripts Controls so in the script we are able to easily set all constant to model for simulate different situations.
-    Let see the function of our prepared model.This precalculated data entered calculation loop.
-Next loop read the value of predefined number of customers in each period and simulated the virtual customer bavior in order process in the next steps:
-We can see model situation in~\ref{apendixc} and that results is described in the final summary~\ref{summary} as results from previous models from section~\ref{sec:baseline}.
-Then Matlab's function $predint$ was used to return income prediction results for year 2020 used fitted model in section~\ref{sec:baseline}.
-to calculate aberration for each month from plotted results as it seen on figure~\ref{predict}.
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=80mm]{predict.png}
-    \end{center}
-    \caption{Predict income data in live script~\cite{luarn}}
-    \label{predict}
-\end{figure}\\
-Fitted and prepared models from section~\ref{sec:baseline} was compared with real data
-Experiment was simulated in Matlab, where internal predefined function was used.
-See more in section~\ref{subsec:libraries}.
-Let use Matlab Curve fitting tool to solve our linear and polynomial models as you can see on figure 2.4, this predefined tool calculate coefficient for and then the prediction in Matlab Live script was done as we see on figure ?? These two models was fitted on income data from years 2018 and 2019 and used in Experi- ment section 2.2.
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=90mm]{cftool.png}
-    \end{center}
-    \caption{Fitting the data with cftool~\cite{luarn}}
-    \label{cftool}
-\end{figure}\\
-
-
-
+Implementation of our experiment created in Matlab with results explanations enriched with Live script application with dynamic weights setting.
 \section{Used software, libraries and predefined functions} \label{subsec:libraries}
 \textbf{Matlab 2020a}\\
 MATLAB (matrix laboratory) is a fourth-generation high-level programming language and interactive environment for numerical
@@ -72,12 +44,34 @@ specified by transition probability matrix, $TRANS$, and emission probability ma
 $EMIS(i,k)$ is the probability that symbol $k$ is emitted from state $i$.\\
 \\
 \textbf{shopycrm.com}\\
-Online CRM application focused on e-commerce stores which provides all store workflows and get precalculated data which we will use for our models to simplify the prediction calculation.
-\newpage
-\section{Fitting models}
+Online CRM application focused on e-commerce stores which provides all store workflows and get precalculated data which
+we will use for our models to simplify the prediction calculation.
+\section{Fitting models and prediction} \label{fitting}
+Let use Matlab Curve fitting tool to solve our linear and polynomial models as you can see on figure~\ref{cftool},
+this predefined tool calculate coefficient for and then the prediction in Matlab Live script was done as we see on figure~\ref{predict}.
+These two models was fitted on income data from years 2018 and 2019 as is described in our Experiment (see section~\ref{experiment}).
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=100mm]{cftool.png}
+    \end{center}
+    \caption{Fitting the data with cftool~\cite{luarn}}
+    \label{cftool}
+\end{figure}\\
+Then Matlab's function $predint$ was used to return income prediction results for year 2020 used fitted linear model.
+Polynomial model used other approach to calculate aberration for each month from plotted results as it seen on figure~\ref{predict}.
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=100mm]{predict.png}
+    \end{center}
+    \caption{Predict income data in live script~\cite{luarn}}
+    \label{predict}
+\end{figure}\\
+Fitted and prepared models from section~\ref{subsec:calculate_models} was compared with real data from year 2020.
 On the figure~\ref{plot} is graphical presentation of data and our linear and polynomial models.
-It turned out that the first linear model (blue line), is not directly corresponding the data, but it is copying the trend of the income,
-what we should see on figure~\ref{prediction} with predicted data to 2020.
+It turned out that the first linear model (blue line), is not directly corresponding the data, but it is copying the trend of the income (red line),
+polynomial model (green line) returns better results that previous one.
+The best results returned from Customer behavior HMM (violet line).
+what we should see on figure~\ref{plot} with predicted data to 2020.
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=140mm]{plot.png}
@@ -85,61 +79,86 @@ what we should see on figure~\ref{prediction} with predicted data to 2020.
     \caption{Fitting the model on real income from 2018 and 2018}
     \label{plot}
 \end{figure}\\
-\newpage
+Prediction from Customer behavior HMM was made 10 times.
+The final result is arithmetic mean from this prediction which is ten times run to random deviation  was minimised.
+Our prediction script is finally written in Matlab Live script with predefined constants based on Megaplay s.r.o data,
+but for modeling and dynamic prediction are used Live scripts Controls so in the script we are able to easily set all
+constant to model for simulate different situations.
+Let see the dynamic function of our prepared model on figure~\ref{app}.
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=100mm]{app.png}
+    \end{center}
+    \caption{Live Script application to dynamically set weights and constants for model}
+    \label{app}
+\end{figure}\\
+This precalculated data entered calculation loop.
+Next loop read the value of predefined number of customers in each period and simulated the virtual customer behavior in order process.
+This feature gives us ability to easily simulate our model in a different situation.
+Let see some modeled situation in appendix C section~\ref{apendixc}.
+That results are described in the final summary~\ref{summary} same as results from previous regresion models.
 \section{Results} \label{compareresults}
+On the figure~\ref{results} prediction results are seen.
+For the year 2021 is compared with the real income and we can see that the polynomial and Customer behavior HMM model
+get good results, in the opposite of that results linear model predict the trend of the income.
+
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=140mm]{results.png}
+    \end{center}
+    \caption{Prediction from models for years 2020-2021, with real income for 2020.}
+    \label{results}
+\end{figure}\\
+In the graphical view we saw that all our models copy the income, but some of them are easier to calculate, this differences you can see described in Summary (see section~\ref{summary}).
+Get the experiment methodology (see section~\ref{subsec:result_metodology}) to models compare table created.
+As it see in the table~\ref{compare} out Customer behavior HMM return best results from all tested models.
 \begin{table}[h!]
     \begin{center}
         \begin{tabular}{ | l | c | c | c |}
             \hline
             & \textbf{}$ \textbf{linear model} & \textbf{polynomial model} & \textbf{Customer behavior HMM}\\
             \hline
-            \textbf{SSE} & 5.165.10^{12} & 2.534.10^{12} & 1.717.10^{11} \\
-            \textbf{R-square} & 0.2162 & 0.6154 & 0.95 \\
-            \textbf{RMSE} & 4.959.10^5 & 3.652.10^5 & 1.196.10^5\\
+            \textbf{SSE} & 5,165.10^{12} & 2,534.10^{12} & 1,583.10^{11} \\
+            \textbf{R-square} & 0,2162 & 0,6154 & 0,95 \\
+            \textbf{RMSE} & 4,959.10^5 & 3,652.10^5 & 1,149.10^5\\
             \hline
         \end{tabular}
     \end{center}
-    \caption{Compare results table for models.}
+    \caption{Compare fit of goodness for models.}
     \label{compare}
 \end{table}\\
-\begin{table}[h!]
-    \begin{center}
-        \begin{tabular}{ | l | c | c | c | c | c | c | c |}
-            \hline
-            {\textbf{Month}} & \textbf{Real income} & \textbf{1st model} & \textbf{(\%)}  & \textbf{2nd model} & \textbf{(\%)} & \textbf{3rd model} & \textbf{(\%)}\\
-            \hline
-            1/2021 & 2 510 086 & 2 372 333 & 6 & 2 031 000 & 24 & 2 679 419 & 7\\
-            2/2021 & 1 293 778 & 2 256 560 & 74 & 1 696 000 & 31 & 1 367 816 & 6\\
-            3/2021 & 1 022 762 & 2 340 092 & 129 & 1 409 000 & 38 & 1 092 252 & 7\\
-            4/2021 & 1 017 408 & 2 671 671 & 163 & 1 358 000 & 38 & 1 151 301 & 13\\
-            5/2021 & 1 320 608 & 3 086 545 & 134 & 1 403 000 & 6 & 1 369 985 & 4\\
-            6/2021 & 1 590 878 & 3 359 684 & 111 & 1 511 000 & 5 & 1 632 372 & 3\\
-            7/2021 & 1 468 808 & 3 413 621 & 132 & 1 656 000 & 13 & 1 575 324 & 7\\
-            8/2021 & 1 762 959 & 3 390 580 & 92 & 1 847 000 & 5 & 1 959 480 & 11\\
-            9/2021 & 1 782 582 & 3 522 629 & 98 & 1 987 000 & 11 & 1 950 306 & 9\\
-            10/2021 & 1 605 396 & 3 919 220 & 144 & 2 100 000 & 31 & 1 765 984 & 10\\
-            11/2021 & 2 559 070 & 4 467 471 & 75 & 2 187 000 & 17 & 2 611 529 & 2\\
-            12/2021 & 2 544 271 & 4 936 855 & 94 & 2 197 000 & 16 & 2 610 694 & 3\\
-            \hline
-        \end{tabular}
-    \end{center}
-    \caption{Compare results}
-    \label{Compare results}
-\end{table}\\
-In the graphical view we saw that all our models copy the income, but some of them are easier to calculate, this differences you can see described in summary~\ref{summary}.
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=100mm]{prediction.png}
-    \end{center}
-    \caption{Prediction for year 2020}
-    \label{prediction}
-\end{figure}\\
-\newpage
+On the table~\ref{Compare results} are calculated percent aberration from real income in the year 2021.
+We saw the first month linear model reached the best results, but in next months is the best results served by Customer behavior HMM.
 \begin{table}[h!]
     \begin{center}
         \begin{tabular}{ | l | c | c | c |}
             \hline
-            & \textbf{1st model} & \textbf{2nd model} & \textbf{3rd model}\\
+            {\textbf{Month}} & \textbf{Linear model} & \textbf{Polynomial model} & \textbf{Customer behavior HMM}\\
+            \hline
+            1/2021 & 6 & 24 &  7\\
+            2/2021 & 74 & 31 & 6\\
+            3/2021 & 129 & 38 & 7\\
+            4/2021 & 163 & 38 & 13\\
+            5/2021 & 134 & 6 & 4\\
+            6/2021 & 111 & 5 & 3\\
+            7/2021 & 132 & 13 & 7\\
+            8/2021 & 92 & 5 & 11\\
+            9/2021 & 98 & 11 & 9\\
+            10/2021 & 144 & 31 & 10\\
+            11/2021 & 75 & 17 & 2\\
+            12/2021 & 94 & 16 & 3\\
+            \hline
+        \end{tabular}
+    \end{center}
+    \caption{Compare aberration (\%) from real income 2020}
+    \label{Compare results}
+\end{table}\\
+Calculated result per each quarter in 2020 can bee seen at the table~\ref{qResults} is showing to us the oscillation of prediction.
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{ | l | c | c | c |}
+            \hline
+            & \textbf{Linear model} & \textbf{Polynomial model} & \textbf{Customer behavior HMM}\\
             \hline
             1Q (\%) & 69,66 & 30,81 & 6,42\\
             2Q (\%) & 135,83 & 15,00 & 6,50\\

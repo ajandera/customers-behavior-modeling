@@ -22,7 +22,7 @@ Then read the results by Viterbi algoritm and check if the order was made.
 As inputs serves probabilities from predefined submodels used as transition matrix for HMM, number of customers in the predicted period,
 probability matrix of initial states and average income per order by a previous period.
 Our specific situation which is different from standard HMM is described on the figure~\ref{states} and tells that our states are not connected together as in HMM normally does.
-This is caused by specific order process which are not directly connected each other.
+This is caused by specific order process which are not directly connected each other (see flowchart~\ref{flowchart_overview}).
 In the first step model got predefined data from initial part (see section~\ref{sec:preprocessing}) and goes through the model according to the following steps:
 \begin{enumerate}
     \item get probability from Vendor submodel (see section~\ref{subsec:model_vendors}),
@@ -48,9 +48,9 @@ From that condition it is evident that for market to which dominate vendor it wi
 Our model is based on equations from Brands section~\ref{eq:10} and from those equations we will get probability of vendor
 change from vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$ it will disrupt the
 computation and customer will leave our store without completing buying process successfully.
-Results of this computation wil be probability for each iteration of buying process simulation in an interval $<0,1>$.
+Results of this computation wil be probability for each iteration of buying process simulation in an interval $[0,1]$.
 Data for this model will come from open data provided by google.com, heureka.cz/heureka.sk and national governments.
-That data will be combined with calculated price indexes downloaded from shopycrm.com tool.
+That data will be combined with calculated price indexes downloaded from shopycrm.com tool (see flowchart~\ref{flowchart_vendor}).
 \\
 \begin{equation} \label{eq:13}
 V_{xy} = \beta H(P_x-P_y) + \gamma H(Qx-Qy) + \delta H(Px-Py)H(Q_x - Q_y)
@@ -84,7 +84,7 @@ In this model we will simplify only for price effect (see section~\ref{subsubsec
 \end{equation}
 \\
 \begin{itemize}
-    \item $Q_i$ number of orders for product $i$ per day divide amount of orders per same day, prom interval $<0,1>$
+    \item $Q_i$ number of orders for product $i$ per day divide amount of orders per same day, prom interval $[0,1]$
     \item $n_p$ number of products in store
 \end{itemize}
 \\
@@ -93,7 +93,7 @@ In this model we will simplify only for price effect (see section~\ref{subsubsec
 \end{equation}
 \\
 Coefficient C is used to be $\alpha_{ij}$ always positive.
-\textbf{Center of mass aspect} \label{subsubsec:model_psychology_mass} is applied as a part of sociology to our psyhology model.
+\textbf{Center of mass aspect} \label{subsubsec:model_psychology_mass} is applied as a part of sociology to our psychology model.
 Marketers use it for manipulating with customers in global way.
 Like a black friday, Cyber monday etc., in that days stores manipulate with our psychology by discount prices.
 \\
@@ -109,7 +109,7 @@ Like a black friday, Cyber monday etc., in that days stores manipulate with our 
 \beta_{ij} = \frac{C+max(P_j, \overset{-}{P})}{C+max(P_i, \overset{-}{P})}
 \end{equation}
 \\
-This model returns final probability as count of $\alpha$ and $\beta$ probabilities for customer decision to make action from interval $<0,1>$.
+This model returns final probability as count of $\alpha$ and $\beta$ probabilities for customer decision to make action from interval $[0,1]$.
 \\
 \subsection{Loyalty submodel} \label{subsec:model_loyalty}
 This submodel is based on Luarn \& Lin research~\cite{luarn} and we changed theirs model for our needs.\\
@@ -125,7 +125,7 @@ L = \frac{R+Z}{Z}
 \\
 As we see on figure~\ref{Loyalty scheme} Loyalty model consists of all three sub-models (Trust, Customer Satisfaction, Perceived value)
 but commitment model consist of only Trust and Customer Satisfaction.
-Weight coefficient $a,b,c,d,e$ were used to combine Trust, Customer satisfaction and Perceived value.\\
+Weight coefficient $a,b,c,d,e$ were used to combine Trust, Customer satisfaction and Perceived value. (see flowchart~\ref{flowchart_psychology})\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=100mm]{loyalty.png}
@@ -143,16 +143,16 @@ where $O_i$ number of orders divide number of visitors per day $i$.
 \\
 \\
 \textbf{Customer satisfaction} are datasets get from open data per each day, individual satisfaction.
-For simplified the situation we will use average satisfaction per whole store.
+For simplified the situation we will use average satisfaction per whole store (see flowchart~\ref{flowchart_loyalty}).
 \textbf{Perceived value} (Se defined values in~\ref{perceived}) is subjective value, which depend on a strength of the store.
 \subsubsection{Commitment and Loyalty} \label{subsubsec:model_loyalty_commitment}
 \textbf{Commitment} is making the actual choice every day or other period basis to keep up with something e.g. a relationship, personal goal, a task, etc.
 We would have to hold ourselves accountable to keep a commitment to something or someone.
 Similarly, being loyal involves holding ourselves accountable as well.\\
 Against of \textbf{Loyalty} which is usually seen as a character trait rather than a conscious decision.
-This model return probability for customer decision to not leave the store from interval $<0,1>$.\\
+This model return probability for customer decision to not leave the store from interval $[0,1]$.\\
 \subsection{Combining submodels to decision process} \label{subsec:combining_models}
-Appropriataly as a combination method was selected Hidden Markov Model (HMM).
+Appropriataly as a combination method was selected Hidden Markov Model (HMM) (see flowchart~\ref{flowchart_markov}).
 All separates models return probabilities which was put together to square matrix used as input to HMM (see section~\ref{markovmodel}).
 These probabilities will be combined with specific weights coefficients to always prevent positives results.
 Let us created approach to store information from Customer behavior HMM about successfully order prediction.
@@ -202,7 +202,7 @@ In contrast with polynomial model which has much better results in absolut incom
 We compared prediction period and for each we calculate aberration against real store income from 2020.
 Let us see our experiment in detail description and then see results in Evaluation section~\ref{evaluation} and Summary section~\ref{summary}.\\
 \subsection{Preprocessing of input data} \label{sec:preprocessing}
-The data comes from Megaplay s.r.o online stores and should have to be anonymized \footnote{Data anonymization is a type of information sanitization whose intent is privacy protection.
+The data comes from Megaplay s.r.o online stores and should have to be\\ anonymized \footnote{Data anonymization is a type of information sanitization whose intent is privacy protection.
 It is the process of either encrypting or removing personally identifiable information from data sets, so that
 the people whom the data describe remain anonymous.} and pseudonymized \footnote{Pseudonymization is a data management
 and de-identification procedure by which personally identifiable information fields within a data record are replaced
@@ -214,13 +214,13 @@ This prepared data will serve for baseline (Linear and polynomial models) and ou
 This value was calculated from anonymize user data from Google Analytics tool used their prediction mechanism to get number of future users based on previous a number of visitors.\\
 \\
 \textbf{Perceived value for psychology model} \label{perceived}\\
-This variable is needed for loyalty model~\ref{subsec:model_loyalty} and comes from an open e-commerce compare data provided by Heureka.cz/Heureka.sk internal tool.\\
+This variable is needed for loyalty model (see section~\ref{subsec:model_loyalty}) and comes from an open e-commerce compare data provided by Heureka.cz/Heureka.sk internal tool.\\
 \\
 \textbf{Number of orders 2018 - 2019}\\
 Number of orders we get from shopycrm.com tool used in Megaplay s.r.o to manage their business processes and also store all needed data.\\
 \\
 \textbf{Unique products sell}\\
-This variable is used in Psychology model~\ref{subsec:model_psychology} for Price aspect calculation~\ref{eq:26}.\\
+This variable is used in Psychology model (see section~\ref{subsec:model_psychology}) for Price aspect calculation~\ref{eq:17}.\\
 \\
 \textbf{Customer satisfaction} \label{customerSat}\\
 This value is provided by Heureka open data, and it's a calculated value from the all customer reviews of the store.\\
@@ -285,8 +285,8 @@ It represents the relation between vendor prices and vendor quality.\\
     \caption{Calculated data from Megaplay s.r.o}
     \label{megaplay_data_equation}
 \end{table}
-\\
-\subsection{Models for prediction} \label{sec:calculate_models}
+\newpage
+\subsection{Models for prediction} \label{subsec:calculate_models}
 As a baseline for our model will be used linear and polynomial fitting (see section~\ref{sec:regression}).
 There are first two models which have to be solved.
 The last one is our new Customer behavior HMM:\\
@@ -333,7 +333,7 @@ This random variables are used as a simplification of that situation.\\
 \\
 All input data and models were prepared, so the prediction is have to be simulated.
 Let us use data prepared in section~\ref{sec:preprocessing} and calculate prediction income from identified models.
-\subsection{Compare results methodology} \label{subsec:matlab}
+\subsection{Compare results methodology} \label{subsec:result_metodology}
 Finally we define the method to compare our models results.
 Absolute number of income value prediction should not be important for the store owners because of that we calculated the aberration for each month
 prediction and then we easily calculate quarterly and yearly results.
