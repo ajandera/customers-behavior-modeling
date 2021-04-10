@@ -2,7 +2,7 @@
 
 \chapter{Analytical part} \label{sec:analytical}
 
-\section{Introduction} \label{sec:description}
+\section{Introduction} \label{sec:introduction}
 Each e-commerce project solves how to predict behavior of their consumers or visitors.
 In that complex prediction is usually used statistical methods like a moving average and linear regression in order to
 get an idea of consumers behavior.
@@ -25,29 +25,32 @@ Let's teach e-commerce business how to use them on a daily basis and how to over
 The Decoy Effect or the Asymmetric Dominance Effect is a cognitive bias in which consumers will tend to have a specific
 change in preferences between two vendor options when also presented with a third option that is asymmetrically dominated.
 Simply put when there is a third strategically important choice, like the decoy, then the consumer is more likely to choose
-the more expensive of the other two options. An option is asymmetrically dominated when it is inferior in all respects to another one.
-However, in comparison to the other option, it is inferior in some respects and superior in others. In other words, it is completely
-dominated by one option and only partially dominated by the other. When the asymmetrically dominated option is present, a higher
+the more expensive of the other two options.
+An option is asymmetrically dominated when it is inferior in all respects to another one.
+However, in comparison to the other option, it is inferior in some respects and superior in others.
+In other words, it is completely dominated by one option and only partially dominated by the other.
+When the asymmetrically dominated option is present, a higher
 percentage of consumers will prefer the dominating option like when the asymmetrically dominated option is absent.
 The asymmetrically dominated option is therefore a decoy serving to increase preference for the dominating option.\\
 \\
 \textbf{Lock-in} \label{subsec:lock-in}\\
 Proprietary lock-in, or consumer lock, makes the consumer dependent on the products and services of a particular entity
-by creating significant costs of switching to the products and services of others. This can be achieved, for example,
-by the use of non-standardized patented product components. Locking that creates barriers to market entry, can be avoided by antitrust measures.
+by creating significant costs of switching to the products and services of others.
+This can be achieved, for example,
+by the use of non-standardized patented product components.
+Locking that creates barriers to market entry, can be avoided by antitrust measures.
 Proprietary locking is for example blocking mobile phones for only one of the operators or DRM.
 \\
-\section{Mathematical background and models} \label{sec:introduction}
-Overview of mathematical equations and approaches used to our prediction in context of Marketing approaches usually used to predict consumer behavior.\\
-\\
-\subsection{Simple Dynamic Models} \label{subsec:simpleDynamicModels}\\
-One of the simplest models that have been considered for human behavior modeling are dynamic single prices~\cite{pantland}:
+\section{Modeling of Human Behavior} \label{sec:modeling}
+Overview of mathematical equations and approaches used to modeling in context of Marketing approaches usually used to simulate consumer behavior.
+\subsection{Dynamic Model} \label{subsec:dynamicModel}\\
+One of the simplest models that have been considered for human behavior modeling are \textbf{dynamic single} prices~\cite{pantland}:
 
 \begin{equation} \label{eq:1}
 X_k = f(X_k, t) + \xi(t),
 \end{equation}
 \\
-where the function $f$ is dynamic evolution of vector $X_k$ at time $k$. $\xi$ is white noise process having known spectral density matrix.
+where the function $f$ is dynamic evolution of vector with possible states $X_k$ at time $k$. $\xi$ is white noise process having known spectral density matrix.
 Then we can define an observation process like~\cite{pantland}:
 
 \begin{equation} \label{eq:2}
@@ -58,18 +61,17 @@ where the sensor observation $Y$ is a function of $h$ of the state vector and ti
 \\
 Subsequently, using Kalman results we are able to find the optimal linear estimate as you can see in equation~\ref{eq:3}.\\
 \\
-\subsection{Multiple Dynamic Models} \label{subsec:multipleDynamicModels}\\
 The consumer behavior is usually not as simple as a single dynamic model.
 For complex model of human behavior we can use some alternatives.
 In many cases we have to use different models for each dynamic response of person~\cite{wilsky}.
 Afterwards we can test each instance of response to predict a person's state.
-From that we can establish multiple model approach to predict future values of state variables.
+From that we can establish \textbf{multiple model} approach to predict future values of state variables.
 In these situations is Kalman’s filter calculation very useful for realtime application because of it’s sufficiently small costs of resources.
 This approach devide the person’s overall behavior down into several prototypical behaviors~\cite{pantland}.
 Mathematically, this is accomplished by setting up a set of states $S$, each associated with a Kalman’s filter and a particular dynamic model.\\
 \\
-\subsection{A linear ODE model} \label{subsec:ode}\\
-In this model the strength of flux between brands and products are determined by perceived brand quality, based upon binary
+In many situations \textbf{linear ODE model} is used.
+In this model the strength of flux between brands and products are determined by perceived brand quality, based upon binary.
 The simplest response to such comparisons is an attempt by customers to minimize the expected regret resulting from any choice, which is assumed here.
 It has been previously shown that the choice rule recognizes the attribute-wise proximity of an alternative to other brands.
 Therefore is appropriate for preference change to be modelled on the pair-wise ranking of brands in each quality.
@@ -79,8 +81,6 @@ More sophisticated customer behavior, capable of not only ranking brands but dis
 However, this may be justified because, at the very least, subjective attribute valuations appear to be non-linear reference point dependent functions.
 The ith measurement of innovations process is, intuitively, the part of the observation data that is unexplained by the ith model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.
-Example of simle linear ODE model:\\
-$$X(t) = \frac{dX}{dt}$$
 \\
 \subsection{Discrete-time model} \label{subsec:discrete}\\
 Discrete models or difference equations \footnote{Difference equations can be viewed either as a discrete analogue of differential equations, or independently.
@@ -98,8 +98,7 @@ The measurement innovations process for the $i$th model.\\
 \\
 The $i$th measurement innovations process is, intuitively, the part of the observation data that is unexplained by the $i$th model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.\\
-
-\subsection{Regression models} \label{sec:regression}
+\subsection{Regression model} \label{sec:regression}
 A regression model is used to investigate the relationship between two or more variables and estimate one variable based on the others.
 In regression analysis, variables can be independent, which are used as the predictor or causal input and dependent, which are used as response variables.
 
@@ -118,7 +117,7 @@ That is a value from $<-1, 1>$ range indicates the strength of the association o
 A linear regression line has an equation of the form $Y = a + bX$, where $X$ is the explanatory variable and $Y$ is the dependent variable.
 The slope of the line is $b$, and $a$ is the intercept.
 Example of some basic linear models:\\
-\begin{equation} \label{eq:lin}
+\begin{equation} \label{eq:4}
 \begin{array}{l@{}l}
 	Y = ax + b\\
 	Y = a + bx + c\\
@@ -149,7 +148,7 @@ A model which is consistent with the knowledge of data and its environment shoul
 It is always possible for a polynomial of order to pass through n points so that a polynomial of sufficiently high degree can always be found that provides a good fit to the data.
 Such models neither enhance the understanding of the unknown function nor be a good predictor.
 Example of some basic polynomial models from degree 2 to degree 4:\\
-\begin{equation} \label{eq:poly}
+\begin{equation} \label{eq:5}
 \begin{array}{l@{}l}
 	Y = ax^2 + b\\
 	Y = ax^2 + bx + c\\
@@ -158,7 +157,8 @@ Example of some basic polynomial models from degree 2 to degree 4:\\
 \end{array}
 \end{equation}
 
-\section{Modeling and Prediction of Human Behavior} \label{sec:prediction}
+\section{Prediction of Human Behavior} \label{sec:prediction}
+Overview of mathematical approaches used to predict consumer behavior.
 Based on equation~\ref{eq:3},\ we can continue to find optimal linear estimate $X_k$ using the Kalman's filter~\cite{pantland}: \footnote{In statistics
 and control theory, Kalman filtering, also known as linear quadratic estimation (LQE), is an algorithm that
 uses a series of measurements observed over time, containing statistical noise and other inaccuracies, and produces
@@ -166,7 +166,7 @@ estimates of unknown variables that tend to be more accurate than those based on
 a joint probability distribution over the variables for each timeframe.
 The filter is named after Rudolf E. Kálmán, one of the primary developers of its theory.}
 
-\begin{equation} \label{eq:5}
+\begin{equation} \label{eq:6}
 X = X_{k}^{*} + K_x(Y_k - h(X_{k}^{*},t)),
 \end{equation}
 \\
@@ -199,29 +199,33 @@ Alternatively, we can look at individual customers and their shopping behavior a
 Ideally we can predict behavior for each customer and from these results we are able to create a global results for each store or industry.\\
 \\
 \textbf{Loyalty} \label{subsec:loyalty}\\
-Loyalty is the tendency for some customers to use the same products or brands again. This behavior we can describe with systems of ordinary differential equations.
+Loyalty is the tendency for some customers to use the same products or brands again.
+This behavior we can describe with systems of ordinary differential equations.
 The stronger the loyalty, the slower the changes in the number of people buying specific products.
 For discrete-time models, the degree of loyalty corresponds to the size of diagonal elements in a transition matrix.
-During the modelling we have to calculate with  disloyalty model too. In some industries like a supermarkets,
+During the modelling we have to calculate with  disloyalty model too.
+In some industries like a supermarkets,
 people buy from other reason, so some of our input variables in modelling should be detection of loyalty in out industry.
 Next aspect of loyalty could be a memory effect which represent people returning to products they had previously used,
-after trying something new they then did not like. This could be taken into account perhaps by using recurrence
-relations or differential equa- tions of higher than first order or even employing delay-differential equations.\\
+after trying something new they then did not like.
+This could be taken into account perhaps by using recurrence
+relations or differential equations of higher than first order or even employing delay-differential equations.\\
 \\
 \textbf{Sociology} \label{subsec:sociology}\\
 In this context, we can understand sociology as a process where people influence other people with their purchases.
-In nowadays there is some kind of trend when people buy same brands or products. As was mentioned in part lock-in~\ref{subsec:lock-in},
+In nowadays there is some kind of trend when people buy same brands or products.
+As was mentioned in part lock-in~\ref{subsec:lock-in},
 there exist an option with one product dominating the market.
 This possibility is very hard to test in relevant way, because data of big  companies which dominates in some kind of industry are very hard to get legally.
 Even if their competitors have more or less identical products.
-This effect and its opposite, are easily modelled by ODE~\ref{subsec:ode} and discrete-time models.
+This effect and its opposite, are easily modelled by discrete-time models (see section ~\ref{subsec:discrete}).
 Opposite is very important in sociology because of people wanting to be different sometimes from irrationals reasons.
 
 \subsection{Markov Chains} \label{subsec:chain}
 A Markov chain is a process that occurs in a series of time-steps.
 In each is a random choice is made among a finite (or also enumerable) number of states since both  the index set and
 the state space are discrete, as is seen on figure~\ref{markovmodel}, then we denote by~\cite{patel}:\\
-\begin{equation} \label{eq:6}
+\begin{equation} \label{eq:7}
 \begin{array}{l@{}l}
 	p_{ij}=P[X_{n+1}=j|X_n=i],
 \end{array}
@@ -231,15 +235,28 @@ For homogeneous chains, these probabilities do not depend on $n$, i.e., they are
 Then, the initial distribution, together with the transition matrix P, determines the probability distribution for any state at all future times.\\
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=140mm]{markov_model.png}
+		\includegraphics[width=120mm]{markov_model.png}
 	\end{center}
 	\caption{Basic schema of Markov model in human decision~\cite{patel}}
 	\label{markovmodel}
-\end{figure}
+\end{figure}\\
+\textbf{Hidden Markov model} \label{subsec:hmm}\\
+The statistical implementation of Markov chain in which the system being modeled is assumed to be a Markov process $X$ with unobservable states.
+HMM assumes that there is another process $Y$ with dependent behavior on $X$.
+This approach is used to learn about $X$ by observing $Y$.
+The states of the process $X_n$ are hidden states and the result from equation:\\
+\begin{equation} \label{eq:8}
+P = (Y_n ∈ A|X_n = x_n),
+\end{equation}\\
+where $P$ is emission probability (some time called output probability) and $X_n$ is Markov process which is not directly observable.
+Both $Y_n$ and $X_n$ let it be discrete-time processes.
+For every $n \geg 1, x_1,\ldots ,x_n$ and an arbitrary (measurable) set $A$.\\
+This method is without any memory so past doesn't mather, only future is important and relevant for HMM.\\
 \\
 \textbf{A Markov model with social influences} \label{subsec:markov}\\
 This model is based on Markov chains, an stochastic model describing a sequence of possible events in which the probability
-of each event depends only on the state attained in the previous event. A countably infinite sequence, in which the chain moves
+of each event depends only on the state attained in the previous event.
+A countably infinite sequence, in which the chain moves
 state at discrete time steps, gives a discrete-time Markov chain (DTMC).
 A continuous-time process is called a continuous-time Markov chain (CTMC).
 It is named after the Russian mathematician Andrey Markov.
@@ -268,7 +285,6 @@ The intuition is occasionally important, but this belongs to special market and 
 \\
 In this case psychology covers how and what influence people to make thier choises of actual items on the shelves in
 shop and the possible reason why they will buy something different from previously.
-
 Advertising might be comprised into these characteristics but could also possibly be considered as part of the sociological
 influences (point 1 and 2), especially if the advertising takes the form of a well known figure endorsing a product.
 More specifically, the following four properties have been identified by Unilever Research~\cite{patel} as being important and their influence were included in one or more models:
@@ -344,14 +360,14 @@ the value which customer internally assigned to that product and his price.
 This dependence is taken to be of exponential form.
 Assuming that guaranteeing that all probabilities are positive)
 \\
-\begin{equation} \label{eq:7}
+\begin{equation} \label{eq:9}
 p_i = C\exp(V_i - sP_i),
 \end{equation}
 \\
 where $s$ is a measure of the relative importance of price to the customer, and $C$ is a normalisation constant set to be results always positive. $V_i$ is subjective value
 attached to product by a customer with dependency on price of the product $P_i$.~\cite{patel}:
 \\
-\begin{equation} \label{eq:8}
+\begin{equation} \label{eq:10}
 \sum_{i=1}^n p_i = 1.
 \end{equation}
 \\
@@ -360,7 +376,7 @@ the increased likelihood of the customer buying the same brand as he bought prev
 and the peoples who have an influence on a customer (neighbours).
 Each of these dependencies are taken to be linear, giving~\cite{patel}:
 \\
-\begin{equation} \label{eq:9}
+\begin{equation} \label{eq:11}
 V_i = aQ_i + lI_i + hN_i,
 \end{equation}
 \\
@@ -417,7 +433,7 @@ the product space is defined by just two characteristics for each product $i$ wi
 We can define the ‘strength’\footnote{The power if the product or service to be attractive for customer.} of a product as
 the distance of the product from the origin in product space as~\cite{pantland}:
 \\
-\begin{equation} \label{eq:10}
+\begin{equation} \label{eq:12}
 U_i = \frac{(P_i + Q_i)}{2}.
 \end{equation}
 \\
