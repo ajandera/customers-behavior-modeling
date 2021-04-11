@@ -463,7 +463,7 @@
 
     \subsection*{Bibliographic citation}
 
-    \MakeUppercase\@author@lastname, \@author@firstname. {\itshape \@title@sk}. \@college@city: \@college@sk, \@faculty@sk, \@submissionyear. \pageref{theend}s. Supervisor: \@supervisor
+    \MakeUppercase\@author@lastname, \@author@firstname. {\itshape Customers behavior modeling in e-commerce}.\\ \@college@city: \@college@sk, Faculty of Mining, Ecology, Process\\ Control and Geotechnologies, \@submissionyear. \pageref{theend}s. Supervisor: \@supervisor
 
     \newpage
 
