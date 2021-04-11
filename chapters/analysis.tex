@@ -4,28 +4,28 @@
 
 \section{Introduction} \label{sec:introduction}
 Each e-commerce project solves how to predict behavior of their consumers or visitors.
-In that complex prediction is usually used statistical methods like a moving average and linear regression in order to
+In that complex prediction statistical methods like a linear and polynomial regression is usually used in order to
 get an idea of consumers behavior.
 Basically we need to calculate conversion rate, bounce rate, income value per order and per a customer.
 The problem of these values is their non-predictable state by ordinary methods.
 Based on Time series analysis we are able to predict
 future income but with unsatisfactory aberration.
 Better results are produced by trigonometric and polynomial functions as a prediction model.
-However on these methods are not applicable psychology and sociology aspects.
+However are not applicable using these methods psychology and sociology aspects.
 There are several statistical methods that can be used to predict income.
 In some cases, the reality of the product life cycle is different.
 Such irrelevant data therefore complicate management's decisions on the predictive cash flow model of their business.
-So let us create better solutions for complex models to predict company income with minimal aberration.
-The best approach is to create business plans with that modeling before, so we can minimize the risk of our business.
-There are  two phenomena of particular interest in assessing modelling options,  the decoy effect and vendor lock-in (see section~\ref{subsec:lock-in}) principles.
+Let us create better solutions for complex models to predict company income with minimal aberration.
+The best approach is to create business plans minimising the risk of our business.
+There are  two phenomena of particular interest in assessing modelling options,  the decoy effect and vendor lock-in principles (see section~\ref{subsec:lock-in}).
 As is written in Models of Consumer Behaviour~\cite{patel}, this modelling is especially used when the new brand or product is established.
-Let's teach e-commerce business how to use them on a daily basis and how to overcome the obstacle like a research price for that studies.\\
+Let's study e-commerce business, how to use it on a daily basis and how to overcome the obstacle like a research price for that studies.\\
 \\
 \textbf{Decoy effect} \label{subsec:decoy}\\
 The Decoy Effect or the Asymmetric Dominance Effect is a cognitive bias in which consumers will tend to have a specific
-change in preferences between two vendor options when also presented with a third option that is asymmetrically dominated.
+change in preferences between two vendor options when faced with a third option that is asymmetrically dominated.
 Simply put when there is a third strategically important choice, like the decoy, then the consumer is more likely to choose
-the more expensive of the other two options.
+the more expensive option of the other two.
 An option is asymmetrically dominated when it is inferior in all respects to another one.
 However, in comparison to the other option, it is inferior in some respects and superior in others.
 In other words, it is completely dominated by one option and only partially dominated by the other.
@@ -39,10 +39,10 @@ by creating significant costs of switching to the products and services of other
 This can be achieved, for example,
 by the use of non-standardized patented product components.
 Locking that creates barriers to market entry, can be avoided by antitrust measures.
-Proprietary locking is for example blocking mobile phones for only one of the operators or DRM.
+Proprietary locking is for example blocking mobile phones for only one of the operators or Digital Rights Management.
 \\
 \section{Modeling of Human Behavior} \label{sec:modeling}
-Overview of mathematical equations and approaches used to modeling in context of Marketing approaches usually used to simulate consumer behavior.
+Overview of mathematical models and approaches used to modeling marketing approaches usually used to simulate consumer behavior is described in this section.
 \subsection{Dynamic Model} \label{subsec:dynamicModel}\\
 One of the simplest models that have been considered for human behavior modeling are \textbf{dynamic single} prices~\cite{pantland}:
 
@@ -50,23 +50,23 @@ One of the simplest models that have been considered for human behavior modeling
 X_k = f(X_k, t) + \xi(t),
 \end{equation}
 \\
-where the function $f$ is dynamic evolution of vector with possible states $X_k$ at time $k$. $\xi$ is white noise process having known spectral density matrix.
+where the function $f$ is dynamic evolution of vector $X_k$ with possible states at time $k$. $\xi$ is white noise process having known spectral density matrix.
 Then we can define an observation process like~\cite{pantland}:
 
 \begin{equation} \label{eq:2}
-Y_k = h(X_k, t) + \eta(t),
+Y_k = h(X_k, t) + \xi(t),
 \end{equation}
 \\
-where the sensor observation $Y$ is a function of $h$ of the state vector and time. $\eta$ is white noise process having known spectral density matrix.\\
+where the sensor observation $Y$ is a function of $h$ of the state vector and time. $\xi$ is white noise process having known spectral density matrix.\\
 \\
-Subsequently, using Kalman results we are able to find the optimal linear estimate as you can see in equation~\ref{eq:3}.\\
+Subsequently, using results from Kalman filter we are able to find the optimal linear estimate as you can see in Discrete-time model (see equation~\ref{eq:3}).\\
 \\
 The consumer behavior is usually not as simple as a single dynamic model.
 For complex model of human behavior we can use some alternatives.
 In many cases we have to use different models for each dynamic response of person~\cite{wilsky}.
 Afterwards we can test each instance of response to predict a person's state.
 From that we can establish \textbf{multiple model} approach to predict future values of state variables.
-In these situations is Kalman’s filter calculation very useful for realtime application because of it’s sufficiently small costs of resources.
+In these situations the Kalman’s filter calculation is very useful for realtime application because of it’s sufficiently small costs of resources.
 This approach devide the person’s overall behavior down into several prototypical behaviors~\cite{pantland}.
 Mathematically, this is accomplished by setting up a set of states $S$, each associated with a Kalman’s filter and a particular dynamic model.\\
 \\
@@ -74,18 +74,18 @@ In many situations \textbf{linear ODE model} is used.
 In this model the strength of flux between brands and products are determined by perceived brand quality, based upon binary.
 The simplest response to such comparisons is an attempt by customers to minimize the expected regret resulting from any choice, which is assumed here.
 It has been previously shown that the choice rule recognizes the attribute-wise proximity of an alternative to other brands.
-Therefore is appropriate for preference change to be modelled on the pair-wise ranking of brands in each quality.
+Therefore it is appropriate the preference change to be modelled on the pair-wise ranking of brands in each quality.
 Probably the easiest way is to assign a positive score to a brand for each successful comparison.
 Thus customers attempt to minimize their anticipated regret by opting on any particular quality for a safe bet.
 More sophisticated customer behavior, capable of not only ranking brands but discriminating according to the size of proximity gap requires more complex modelling.
 However, this may be justified because, at the very least, subjective attribute valuations appear to be non-linear reference point dependent functions.
-The ith measurement of innovations process is, intuitively, the part of the observation data that is unexplained by the ith model.
+The $i$th measurement of innovations process is, intuitively, the part of the observation data that is unexplained by the $i$th model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.
 \\
 \subsection{Discrete-time model} \label{subsec:discrete}\\
 Discrete models or difference equations \footnote{Difference equations can be viewed either as a discrete analogue of differential equations, or independently.
 They are used for approximation of differential operators, for solving mathematical problems with recurrences, for building various discrete
-models, etc.} are used to describe biological events or whole systems for which is natural to regret time at fixed discrete intervals~\cite{pantland}:
+models, etc.} are used to describe biological events or whole systems for which it is natural to regret time at fixed discrete intervals~\cite{pantland}:
 
 \begin{equation} \label{eq:3}
 \hat{X}_{k}^{(i)} = X_{k}^{*(i)} + K_k^{(i)}(Y_k - h^{(i)}(X_{k}^{*(i)},t)),
@@ -99,21 +99,21 @@ The measurement innovations process for the $i$th model.\\
 The $i$th measurement innovations process is, intuitively, the part of the observation data that is unexplained by the $i$th model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.\\
 \subsection{Regression model} \label{sec:regression}
-A regression model is used to investigate the relationship between two or more variables and estimate one variable based on the others.
+A regression model is used to investigate the relationship between two or more variables and estimates one variable based on the others.
 In regression analysis, variables can be independent, which are used as the predictor or causal input and dependent, which are used as response variables.
 
 
 \subsubsection{Linear regression} \label{sec:linear}
-As it saw at Linear regression~\cite{linear} linear regression attempts to model the relationship between two variables by fitting a linear equation to observed data.
+Linear regression~\cite{linear} attempts to model the relationship between two variables by fitting a linear equation to observed data.
 One variable is considered to be an explanatory variable, and the other is considered to be a dependent variable.
 For example, we want to relate the weights of individuals to their heights using a linear regression model.
-Before attempting to fit a linear model to observed data, we should first determine if exist a relationship between the variables of interest.
+Before attempting to fit a linear model to observed data, we should first determine if there exists a relationship between the variables of interest.
 This does not necessarily mean that one variable causes the other, but that there is some significant association between them.
 To determine the strength of relationship a scatterplot can be a helpful tool.
 If there appears to be no association between the proposed explanatory and dependent variables, then fitting a linear regression
 model to the data probably will not provide a useful model.
 A valuable numerical measure of association between two variables is the correlation coefficient.
-That is a value from $[-1, 1]$ range indicates the strength of the association of the observed data for the two variables.\\
+That is a value from $[-1, 1]$ range indicating the strength of the association of the observed data for the two variables.\\
 A linear regression line has an equation of the form $Y = a + bX$, where $X$ is the explanatory variable and $Y$ is the dependent variable.
 The slope of the line is $b$, and $a$ is the intercept.
 Example of some basic linear models:\\
@@ -128,7 +128,7 @@ Example of some basic linear models:\\
 \subsubsection{Polynomial regression} \label{sec:poly}
 Polynomial models are a great tool for determining which input factors drive responses and in what direction~\cite{poly}.
 These are also the most common models used for analysis of designed experiments.
-A quadratic (second-order) polynomial model for two explanatory variables has the form of the equation below.
+A quadratic (second-order) polynomial model for two explanatory variables has the form of the equation~\ref{eq:5}.
 The polynomial models can be used in those situations where the relationship between study and explanatory variables is curvilinear.
 Sometimes a nonlinear relationship in a small range of explanatory variable can also be modelled by polynomials.
 The order of the polynomial model is kept as low as possible.
@@ -158,7 +158,7 @@ Example of some basic polynomial models from degree 2 to degree 4:\\
 \end{equation}
 
 \section{Prediction of Human Behavior} \label{sec:prediction}
-Overview of mathematical approaches used to predict consumer behavior.
+In this section overview of mathematical approaches used to predict consumer behavior is described.
 Based on equation~\ref{eq:3},\ we can continue to find optimal linear estimate $X_k$ using the Kalman's filter~\cite{pantland}: \footnote{In statistics
 and control theory, Kalman filtering, also known as linear quadratic estimation (LQE), is an algorithm that
 uses a series of measurements observed over time, containing statistical noise and other inaccuracies, and produces
@@ -172,14 +172,13 @@ X = X_{k}^{*} + K_x(Y_k - h(X_{k}^{*},t)),
 \\
 provided that the Kalman gain matrix $K_k$ is chosen correctly~\cite{kalman}.
 This method iterates for each step $k$ and the filter algorithm use a state prediction at each time step $k$, the filter algorithm
-uses a state prediction $X$, an error covariance matrix prediction $P_k^*$, and a sensor measurement $Y_k$ to determine an optimal linear state estimate $X$.
+uses a state prediction $X$, and a sensor measurement $Y_k$ to determine an optimal linear state estimate $X$.
 If we want to predict human’s future state, we can use this mechanism with larger time steps.
 This mechanism is used e.g. in a car, where such a prediction capability can allow us to maintain synchrony with the driver.
 In experience of Alex Pentland work \footnote{MIT's Human Dynamics Laboratory and the MIT Media Lab Entrepreneurship
 Program, co-leads the World Economic Forum Big Data and Personal Data initiatives, and is a founding member
 of the Advisory Boards for Nissan, Motorola Mobility, Telefonica, and a variety of start-up firms.} this type of prediction is useful only for short time periods,
-for instance, in the case of quick hand motions for up to one-tenth of a
-Especially $f$, $h$ are linear functions and $\xi$, $\eta$ are gaussian.
+for instance, in the case of quick hand motions.
 These functions are commonly extended to "well-behaved" nonlinear problems by approximating
 the nonlinear system by linear functions using a local Taylor expansion\footnote{Taylor series is a representation of a function
 as an infinite sum of terms that are calculated from the values of the function's derivatives at a single point.}.
@@ -188,15 +187,15 @@ as an infinite sum of terms that are calculated from the values of the function'
 Products for customers such as shampoo or tomato sauce are designed to appeal to customers and encouraging them to buy those products.
 It depends on the industry section but all of that designs try to focus on customer’s subconscious.
 However, buying behavior is not only a function of the product.
-In many cases is the connection of many other functions like a social environment of other customers, the competing products in the marketplace,
+In many cases it is the connection of many other functions like a social environment of other customers, the competing products in the marketplace,
 brand marketing strategy, seller trust and professionalism and so on.
 In order to design the best product, it is inevitable to understand not only the physics and chemistry of the product,
 but also the psychology of customers and the sociology of customer groups or networks\cite{patel}.
-From that paragraphs is obvious that the general customer behavior model has many input variables to represent many
-kinds of situations to be successfully in future prediction.
-A good model in the business industry must be able to learn from the actual behavior of the customer at each seller and learn from these data sets in a macroscopically averaged way.
+From that paragraphs it is obvious that the general customer behavior model has many input variables to represent many
+kinds of situations to be successful in future prediction.
+A good model in the business industry must be able to learn from the actual behavior of the customer at each store and learn from these data sets in a macroscopically averaged way.
 Alternatively, we can look at individual customers and their shopping behavior and try to derive large-scale observable effects.
-Ideally we can predict behavior for each customer and from these results we are able to create a global results for each store or industry.\\
+Ideally we can predict behavior for each customer and from these results we are able to create global results for each store or industry.\\
 \\
 \textbf{Loyalty} \label{subsec:loyalty}\\
 Loyalty is the tendency for some customers to use the same products or brands again.
@@ -204,9 +203,9 @@ This behavior we can describe with systems of ordinary differential equations.
 The stronger the loyalty, the slower the changes in the number of people buying specific products.
 For discrete-time models, the degree of loyalty corresponds to the size of diagonal elements in a transition matrix.
 During the modelling we have to calculate with  disloyalty model too.
-In some industries like a supermarkets,
-people buy from other reason, so some of our input variables in modelling should be detection of loyalty in out industry.
-Next aspect of loyalty could be a memory effect which represent people returning to products they had previously used,
+In some industries like supermarkets,
+people buy from other reason, so some of our input variables in modelling should be detection of loyalty in our industry.
+Next aspect of loyalty could be a memory effect which represents people returning to products they had previously used,
 after trying something new they then did not like.
 This could be taken into account perhaps by using recurrence
 relations or differential equations of higher than first order or even employing delay-differential equations.\\
@@ -216,15 +215,16 @@ In this context, we can understand sociology as a process where people influence
 In nowadays there is some kind of trend when people buy same brands or products.
 As was mentioned in part lock-in~\ref{subsec:lock-in},
 there exist an option with one product dominating the market.
-This possibility is very hard to test in relevant way, because data of big  companies which dominates in some kind of industry are very hard to get legally.
+This possibility is very hard to test in relevant way, because data of big  companies which dominate in some kind of industry are very hard to get legally.
 Even if their competitors have more or less identical products.
 This effect and its opposite, are easily modelled by discrete-time models (see section ~\ref{subsec:discrete}).
-Opposite is very important in sociology because of people wanting to be different sometimes from irrationals reasons.
+Opposite is very important in sociology because of people wanting to be different sometimes from irrational reasons.
 
 \subsection{Markov Chains} \label{subsec:chain}
 A Markov chain is a process that occurs in a series of time-steps.
-In each is a random choice is made among a finite (or also enumerable) number of states since both  the index set and
-the state space are discrete, as is seen on figure~\ref{markovmodel}, then we denote by~\cite{patel}:\\
+In each step, there is a random choice made among a finite (or also enumerable) number of states since both  the index set and
+the state space are discrete, as is seen on figure~\ref{markovmodel}.
+Let us use~\cite{patel}:\\
 \begin{equation} \label{eq:7}
 \begin{array}{l@{}l}
 	p_{ij}=P[X_{n+1}=j|X_n=i],
@@ -248,10 +248,9 @@ The states of the process $X_n$ are hidden states and the result from equation:\
 \begin{equation} \label{eq:8}
 P = (Y_n ∈ A|X_n = x_n),
 \end{equation}\\
-where $P$ is emission probability (some time called output probability) and $X_n$ is Markov process which is not directly observable.
-Both $Y_n$ and $X_n$ let it be discrete-time processes.
-For every $n \geg 1, x_1,\ldots ,x_n$ and an arbitrary (measurable) set $A$.\\
-This method is without any memory so past doesn't mather, only future is important and relevant for HMM.\\
+where $P$ is emission probability (sometimes called output probability) and $X_n$ is Markov process which is not directly observable.
+Both $Y_n$ and $X_n$ be discrete-time processes, for every $n \geq 1, x_1,\ldots ,x_n$ and an arbitrary (measurable) set $A$.\\
+This method is without any memory so past doesn't matter, only future is important and relevant for HMM.\\
 \\
 \textbf{A Markov model with social influences} \label{subsec:markov}\\
 This model is based on Markov chains, an stochastic model describing a sequence of possible events in which the probability
@@ -260,7 +259,7 @@ A countably infinite sequence, in which the chain moves
 state at discrete time steps, gives a discrete-time Markov chain (DTMC).
 A continuous-time process is called a continuous-time Markov chain (CTMC).
 It is named after the Russian mathematician Andrey Markov.
-This method is actually better for our purpose than the time continues differential equations which are usually used for prediction.
+This method is actually better for our purpose than the time-continuous differential equations which are usually used for prediction.
 In order to use this model approach, first of all we have to develop the possibility of a decoy effect.
 Then we introduce sociology and obtain results for lock-in analogous.
 These Markov models display both important similarities to and differences from the previous models, and may be simpler to work with.
@@ -276,15 +275,15 @@ The intuition is occasionally important, but this belongs to special market and 
 \\
 \textbf{Modeling and Prediction of Human Behavior may consist of the following steps:}\\
 \begin{enumerate}
-	\item needs decision make
-	\item looking across the site to find some adequate
-	\item make action decision
-	\item shopping workflow process in selected site
-	\item make final payment
+	\item needs decision to make,
+	\item looking across the site to find some adequate product/service,
+	\item make action decision,
+	\item shopping workflow process in selected site,
+	\item make final payment.
 \end{enumerate}
 \\
-In this case psychology covers how and what influence people to make thier choises of actual items on the shelves in
-shop and the possible reason why they will buy something different from previously.
+In this case psychology covers how and what influences people to make their choises of actual items on the shelves in
+shop and the possible reason why they will buy something different from previously buyed.
 Advertising might be comprised into these characteristics but could also possibly be considered as part of the sociological
 influences (point 1 and 2), especially if the advertising takes the form of a well known figure endorsing a product.
 More specifically, the following four properties have been identified by Unilever Research~\cite{patel} as being important and their influence were included in one or more models:
