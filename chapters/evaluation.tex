@@ -3,17 +3,17 @@
 \section{Experiment} \label{experiment}
 Let us prepare experiment to test our models.
 We have prepared three models to create a prediction.
-Data from section~\ref{sec:preprocessing} was used to predict the income for the year 2020.
-We used Matlab to calculate linear regression analysis, polynomial regression analysis and prepare prediction application with Customer behavior HMM.
+Data from section~\ref{sec:preprocessing} were used to predict the income for the year 2020.
+We used Matlab to calculate linear regression, polynomial regression and proposed prediction with Customer behavior HMM.
 From each process we got real income for the year 2020, which were subsequently compared in Evaluation section~\ref{evaluation}.
 Firstly we solved linear regression for model.
 The second one was polynomial model.
-At the last one we solved Customer behavior HHM as submodel combination in $P = (Y_n \in A|X_n = x_n)$.
+At the last we solved Customer behavior HHM as submodel combination in $P = (Y_n \in A|X_n = x_n)$.
 At a first glance we can see that the results from the models are different.
-The first linear model with trigonometric function is not satisfying in real income results, but on the other hand was produced a very interesting result for trend prediction.
-In~contrast with polynomial model which has much better results in absolut income results, but much worse in trend prediction.\\
-We compared prediction period and for each we calculate aberration against real store income from 2020.
-Let us see our experiment in detail description and then see results in Evaluation section~\ref{evaluation} and Summary section~\ref{summary}.\\
+The first linear model with trigonometric function is not satisfying in real income results, but on the other hand produced a very interesting result for trend prediction.
+In~contrast with polynomial model which has much better results in absolute income results, but much worse in trend prediction.\\
+We compared the models for prediction period and for each we calculate aberration against real store income from 2020.
+Let us see our experiment in detail and then see results in Evaluation section~\ref{evaluation} and Summary section~\ref{summary}.\\
 \subsection{Preprocessing of input data} \label{sec:preprocessing}
 The data comes from Megaplay s.r.o online stores and should have to be\\ anonymized \footnote{Data anonymization is a type of information sanitization whose intent is privacy protection.
 It is the process of either encrypting or removing personally identifiable information from data sets, so that
@@ -181,7 +181,7 @@ get good results, in the opposite of results of linear model prediction.
     \begin{center}
         \includegraphics[width=140mm]{results.png}
     \end{center}
-    \caption{Prediction from models for years 2020-2021, with real income for 2020.}
+    \caption{Prediction for years 2020-2021.}
     \label{results}
 \end{figure}\\
 In the graphical view we saw that all our models copy the income, but some of them are easier to calculate, this differences you can see described in Summary (see section~\ref{summary}).

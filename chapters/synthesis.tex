@@ -8,12 +8,13 @@ Finally, our approach will return future income for online store based on previo
 Customer behavior HMM directly returns number of predicted orders used to calculate estimated income.
 For successful prediction open data for store strength and customer satisfaction and some predefined and computed variables from store will be used.
 
-\section{Customer behavior HMM} \label{sec:submodels}
+\section{Customer behavior Hidden Markov Model} \label{sec:submodels}
 Our model is based on Markov models (see section~\ref{markovmodel}) and consist of these three states: order, not finished order, no order decision.
 Model simulates customer behavior during order process and tries to return the way with the most probability.
 Then reads the results by Viterbi algorithm and checks if the order was made.
 As inputs serves probabilities from predefined submodels used as transition matrix for HMM, number of customers in the predicted period,
-probability matrix of initial states and average income per order from previous period.\\
+probability matrix of initial states and average income per order from previous period.
+On the figure~\ref{Model schema with interaction} the computation flow and interactions between models in Customer behavior HMM is presented.\\
 \begin{figure}[h!]
     \begin{center}
         \includegraphics[width=100mm]{computation_schema.png}
@@ -40,31 +41,22 @@ In the first step the model got predefined data from initial part (see section~\
     \caption{Overview of states and their combinations}
     \label{states}
 \end{figure}\\
-On the figure~\ref{Model schema with interaction} the computation flow and interactions between models in Customer behavior HMM is presented.\\
 \subsection{Vendors submodel} \label{subsec:model_vendors}
-For simplification, we will take to account only a two vendors market share, without 100\% domination, because on a real
-market is 100\% monopole unlikely to see and then we will be reflected only main competitor.
-From that condition it is evident that for market to which dominate vendor it will return false positive results.
-Our model is based on equations from Brands section~\ref{eq:10} and from those equations we will get probability of vendor
-change from vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$ it will disrupt the
+For simplification, we will take into account only two vendors market share, without 100\% domination, because on a real
+market 100\% monopole is unlikely to see and then we will reflect only main competitor.
+From that condition it is evident that for market to which vendor dominates it will return false positive results.
+Our model is based on equations from Brands (section~\ref{eq:10}) and from those equations we will get probability of vendor
+change from vendor $A$ to vendor $B$ and if the vendor $B$ will have more strength than vendor $A$, it will disrupt the
 computation and customer will leave our store without completing buying process successfully.
-Results of this computation wil be probability for each iteration of buying process simulation in an interval $[0,1]$.
+Results of this computation will in form of probability for each iteration of buying process simulation in an interval $[0,1]$.
 Data for this model will come from open data provided by google.com, heureka.cz/heureka.sk and national governments.
-That data will be combined with calculated price indexes downloaded from shopycrm.com tool (see flowchart~\ref{flowchart_vendor}).
+That data will be combined with calculated price indexes downloaded from shopycrm.com tool (see flowchart~\ref{flowchart_vendor}):
 \\
 \begin{equation} \label{eq:13}
-V_{xy} = \beta H(P_x-P_y) + \gamma H(Qx-Qy) + \delta H(Px-Py)H(Q_x - Q_y)
+V_{xy} = \beta H(P_x-P_y) + \gamma H(Qx-Qy) + \delta H(Px-Py)H(Q_x - Q_y),
 \end{equation}
 \\
-where $\beta, \gamma, \delta$ are non-negative~\ref{vendorCoeff}.
-\\
-\begin{itemize}
-    \item $P$ is prices of vendors products
-    \item $Q$ is a quality index of vendor
-    \item $H$ is a Heaviside function which will be calculated by equation~\ref{eq:13}.
-\end{itemize}\\
-\\
-\\
+where $\beta, \gamma, \delta$ are non-negative, $P$ is prices of vendors products, $Q$ is a quality index of vendor, $H$ is a Heaviside function which has values:\\
 \begin{equation} \label{eq:14}
 \begin{array}{l}
     H(s) = 1, s > 0 \\
@@ -73,52 +65,42 @@ where $\beta, \gamma, \delta$ are non-negative~\ref{vendorCoeff}.
 \end{equation}
 \\
 \subsection{Psychology submodel} \label{subsec:model_psychology}
-Psychology aspect is trying to simulate customer behavior in thee situation like a prices aspect, society influenced, mood aspect, actual needs
-and so on.
-In this model we will simplify only for price effect (see section~\ref{subsubsec:model_psychology_price}) and center of mass effect (see section~\ref{subsubsec:model_psychology_mass}).\\
+Psychology aspect is trying to simulate customer behavior in situations like a prices aspect, society influenced, mood aspect, actual needs and so on.
+In this model we will simplify only price effect and center of mass effect.\\
 \\
-\textbf{Price aspect} \label{subsubsec:model_psychology_price} is described by equation~\ref{eq:15} and Center of mass is described by equation~\ref{eq:17}.\\
+\textbf{Price aspect} \label{subsubsec:model_psychology_price} is described by equation:\\
 \\
 \begin{equation} \label{eq:15}
-\overset{-}{Q} = \frac{1}{n_p} \sum_{i=1}^{n_p} Q_i
+\overset{-}{Q} = \frac{1}{n_p} \sum_{i=1}^{n_p} Q_i,
 \end{equation}
 \\
-\begin{itemize}
-    \item $Q_i$ number of orders for product $i$ per day divide amount of orders per same day, prom interval $[0,1]$
-    \item $n_p$ number of products in store
-\end{itemize}
-\\
+where $Q_i$ number of orders for product $i$ per day divide amount of orders per same day, prom interval $[0,1]$, $n_p$ number of products in store:\\
 \begin{equation} \label{eq:16}
-\alpha_{ij} = \frac{C+max(Q_j, \overset{-}{Q})}{C+max(Q_i, \overset{-}{Q})}
+\alpha_{ij} = \frac{C+max(Q_j, \overset{-}{Q})}{C+max(Q_i, \overset{-}{Q})}.
 \end{equation}
 \\
 Coefficient C is used to be $\alpha_{ij}$ always positive.
 \textbf{Center of mass aspect} \label{subsubsec:model_psychology_mass} is applied as a part of sociology to our psychology model.
 Marketers use it for manipulating with customers in global way.
-Like a black friday, Cyber monday etc., in that days stores manipulate with our psychology by discount prices.
+Like a black friday, Cyber monday etc., in that days stores manipulate with our psychology by discount prices:
 \\
 \begin{equation} \label{eq:17}
-\overset{-}{P} = \frac{1}{n_p} \sum_{i=1}^{n_p} P_i
+\overset{-}{P} = \frac{1}{n_p} \sum_{i=1}^{n_p} P_i,
 \end{equation}
-\begin{itemize}
-    \item $P_i$ is defined as product price minus retail recommend price divide average price
-    \item $n_p$ number of products in store
-\end{itemize}
-\\
+where $P_i$ is defined as product price minus retail recommend price divide average price, $n_p$ number of products in store:\\
 \begin{equation} \label{eq:18}
-\beta_{ij} = \frac{C+max(P_j, \overset{-}{P})}{C+max(P_i, \overset{-}{P})}
+\beta_{ij} = \frac{C+max(P_j, \overset{-}{P})}{C+max(P_i, \overset{-}{P})}.
 \end{equation}
 \\
 This model returns final probability as count of $\alpha$ and $\beta$ probabilities for customer decision to make action from interval $[0,1]$.
 \\
 \subsection{Loyalty submodel} \label{subsec:model_loyalty}
-This submodel is based on Luarn \& Lin research~\cite{luarn} and we changed their model for our needs.\\
+This submodel is based on Luarn \& Lin research~\cite{luarn} and we changed their model for our needs:\\
 \begin{equation} \label{eq:19}
 L = \frac{R+Z}{Z},
 \end{equation}
 \\
 where L is probability of whole loyalty model, R is probability of separate loyalty model, Z is probability of commitment model.
-\end{enumerate}
 \\
 As we see on figure~\ref{Loyalty scheme} Loyalty model consists of three sub-models (Trust, Customer Satisfaction, Perceived value)
 but commitment model consist of only Trust and Customer Satisfaction.
@@ -162,8 +144,10 @@ Then partial results were combined into complex prediction mechanism, as you can
 HMM in combination with Viterbi algorithm will be used to detect hidden states, which will be reflected in predefined weights for specific
 industries to return data matrix with prediction.
 In a Hidden Markov Model (HMM), we have an invisible Markov chain (which we cannot observe), and each state
-generates in random one out of $k$ observations, which are visible to us. This final generated state is not important for us.
-We need know the way true states. This why Viterbi is used
+generates in random one out of $k$ observations, which are visible to us.
+This final generated state is not important for us.
+We need know the way true states.
+This why Viterbi is used
 Let’s look at our situation.
 Suppose we have the Markov Chain from above, with three states (order, not finished order and no order decision),
 $P$ - the transition probability matrix and $q$ — the initial probabilities.
@@ -187,4 +171,4 @@ P = \left(
 \end{equation}\\
 \\
 where $V_{xy}$ is vendor probability, $\alpha, \beta$ are partial results from psychology submodel, $R$ is partial
-loyalty and $Z$ is commitment probability. $l,m,k$ are a coefficients of initial states probabilities.
+loyalty and $Z$ is commitment probability, and $l,m,k$ are coefficients of initial states probabilities.

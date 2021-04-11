@@ -43,7 +43,7 @@ Proprietary locking is for example blocking mobile phones for only one of the op
 \\
 \section{Modeling of Human Behavior} \label{sec:modeling}
 Overview of mathematical models and approaches used to modeling marketing approaches usually used to simulate consumer behavior is described in this section.
-\subsection{Dynamic Model} \label{subsec:dynamicModel}\\
+\subsection{Dynamic Models} \label{subsec:dynamicModel}\\
 One of the simplest models that have been considered for human behavior modeling are \textbf{dynamic single} prices~\cite{pantland}:
 
 \begin{equation} \label{eq:1}
@@ -82,7 +82,7 @@ However, this may be justified because, at the very least, subjective attribute 
 The $i$th measurement of innovations process is, intuitively, the part of the observation data that is unexplained by the $i$th model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.
 \\
-\subsection{Discrete-time model} \label{subsec:discrete}\\
+\subsection{Discrete-time Models} \label{subsec:discrete}\\
 Discrete models or difference equations \footnote{Difference equations can be viewed either as a discrete analogue of differential equations, or independently.
 They are used for approximation of differential operators, for solving mathematical problems with recurrences, for building various discrete
 models, etc.} are used to describe biological events or whole systems for which it is natural to regret time at fixed discrete intervals~\cite{pantland}:
@@ -98,7 +98,7 @@ The measurement innovations process for the $i$th model.\\
 \\
 The $i$th measurement innovations process is, intuitively, the part of the observation data that is unexplained by the $i$th model.
 The model that explains the largest portion of the observations is, of course, the model most likely to be correct.\\
-\subsection{Regression model} \label{sec:regression}
+\subsection{Regression Models} \label{sec:regression}
 A regression model is used to investigate the relationship between two or more variables and estimates one variable based on the others.
 In regression analysis, variables can be independent, which are used as the predictor or causal input and dependent, which are used as response variables.
 
@@ -240,6 +240,7 @@ Then, the initial distribution, together with the transition matrix P, determine
 	\caption{Basic schema of Markov model in human decision~\cite{patel}}
 	\label{markovmodel}
 \end{figure}\\
+\\
 \textbf{Hidden Markov model} \label{subsec:hmm}\\
 The statistical implementation of Markov chain in which the system being modeled is assumed to be a Markov process $X$ with unobservable states.
 HMM assumes that there is another process $Y$ with dependent behavior on $X$.
@@ -357,7 +358,7 @@ to a plane in three-dimensional space $(A, B, C)$.\\
 the probability, $p_i$, with which a customer buys a given product $i$ from a range of products $[1, n]$ depends on
 the value which customer internally assigned to that product and his price.
 This dependence is taken to be of exponential form.
-Assuming that guaranteeing that all probabilities are positive)
+Assuming that guaranteeing that all probabilities are positive:
 \\
 \begin{equation} \label{eq:9}
 p_i = C\exp(V_i - sP_i),
@@ -404,12 +405,12 @@ Consider a linear flux $\alpha_{xy}$ of preferences moving to brand $X$ from bra
 All fluxes have to be strictly positive.
 It's in improper to consider negative flux, so really excluded is only zero value.
 Flux is the proportion of customer preference to switch to other brand or product from previous one.
+The shaded region in figure~\ref{Affordability of products} is the region of products dominated by product 1.
 \begin{figure}[h!]
 	\begin{center}
 		\includegraphics[width=80mm]{affordability.png}
 	\end{center}
-	\caption{Products in the affordability-value plane.
-	The shaded region is the region of products dominated by product 1~\cite{pantland}.}
+	\caption{Products in the affordability-value plane~\cite{pantland}.}
 	\label{Affordability of products}
 \end{figure}
 \\
